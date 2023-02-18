@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomePage } from '@modules';
+import { HomePage } from './modules/HomeModule/pages/HomePage/HomePage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { RegisterPage } from './modules/HomeModule/pages/RegisterPage/RegisterPage';
 import WelcomePage from './modules/HomeModule/pages/WelcomePage/WelcomePage';
