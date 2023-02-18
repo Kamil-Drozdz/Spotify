@@ -1,0 +1,23 @@
+.container {
+	color: black;
+
+	.welcome {
+		font-size: 32px;
+		font-weight: bold;
+	}
+	.logout-button {
+		background-color: #65d36e;
+		border-radius: 50px;
+		border: none;
+		padding: 8px 10%;
+		font-weight: bold;
+
+		cursor: pointer;
+		&:hover {
+			background-color: #4ecf58;
+		}
+		&:active {
+			opacity: 50%;
+		}
+	}
+}

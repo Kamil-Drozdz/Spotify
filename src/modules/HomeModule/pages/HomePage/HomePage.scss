@@ -3,9 +3,9 @@ body {
 	height: 100%;
 	margin: 0;
 	font-family: Arial, Helvetica, sans-serif;
-	color: black;
 }
 .container {
+	color: black;
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
@@ -14,11 +14,11 @@ body {
 	justify-content: center;
 	align-items: center;
 	.login-section {
+		min-width: 230px;
 		width: 20%;
 		.title {
 			display: flex;
 			justify-content: center;
-			color: black;
 		}
 		.text {
 			font-weight: bold;
@@ -29,11 +29,19 @@ body {
 		.buttons {
 			display: flex;
 			flex-direction: column;
+
 			.button-facebook {
 				img {
 					margin-right: 12px;
 				}
+				&:hover {
+					background-color: #3c4f7d;
+				}
+				&:active {
+					opacity: 50%;
+				}
 				display: flex;
+				cursor: pointer;
 				align-items: center;
 				justify-content: center;
 				background-color: #445a90;
@@ -45,24 +53,45 @@ body {
 			.button-apple {
 				img {
 					margin-right: 12px;
+					width: 18px;
+					height: 18px;
+					object-fit: contain;
+				}
+				&:hover {
+					padding: 12px;
+					background-color: #191919;
+					border: solid 1px #000000;
+				}
+				&:active {
+					opacity: 50%;
 				}
 				display: flex;
 				align-items: center;
+				cursor: pointer;
 				justify-content: center;
 				margin: 8px 0px;
-				background-color: black;
+				background-color: rgb(46, 45, 45);
 				border-radius: 50px;
 				border: solid 1px black;
-				padding: 6px;
+				padding: 12px;
 				color: white;
 			}
 			.button-google {
 				img {
 					margin-right: 12px;
 				}
+				&:hover {
+					padding: 6px;
+					background-color: #e0dbdb;
+					border: solid 1px #000000;
+				}
+				&:active {
+					opacity: 50%;
+				}
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				cursor: pointer;
 				background-color: white;
 				border-radius: 50px;
 				border: solid 1px rgb(88, 85, 85);
@@ -123,11 +152,25 @@ body {
 				border-radius: 50px;
 				border: none;
 				padding: 8px 10%;
+				font-weight: bold;
+				margin-top: 10px;
 				margin-bottom: 30px;
+				cursor: pointer;
+				&:hover {
+					background-color: #4ecf58;
+				}
+				&:active {
+					opacity: 50%;
+				}
 			}
 			border-bottom: 2px solid rgb(167, 165, 165);
+			margin-bottom: 10px;
+		}
+		.error {
+			color: red;
 		}
 		.button-register {
+			margin-top: 10px;
 			width: 100%;
 			border-radius: 50px;
 			padding: 8px;
@@ -135,6 +178,25 @@ body {
 			background-color: white;
 			color: gray;
 			border: 1px solid rgb(167, 165, 165);
+			&:hover {
+				background-color: #4ecf58;
+				color: #000000;
+				border: 1px solid black;
+			}
+			&:active {
+				opacity: 50%;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 1023px) {
+	.container {
+		justify-content: flex-start;
+		padding-bottom: 20%;
+		.login-section {
+			width: 80%;
+			max-width: 600px;
 		}
 	}
 }
