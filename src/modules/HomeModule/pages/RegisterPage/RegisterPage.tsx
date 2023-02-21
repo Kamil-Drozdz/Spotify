@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../firebase.js';
 import './RegisterPage.scss';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface FormValues {
 	displayName: string;
@@ -53,7 +55,10 @@ export const RegisterPage: React.FC = () => {
 			const userName = await updateProfile(userCurrent, { displayName: formValues.displayName }).catch(err =>
 				console.log(err)
 			);
-			navigate('/');
+			toast.success('account has been created, log in');
+			setTimeout(() => {
+				navigate('/');
+			}, 2500);
 		} catch (error: any) {
 			setError(error.message);
 		}
@@ -192,6 +197,19 @@ export const RegisterPage: React.FC = () => {
 					<button type='submit'>Register</button>
 				</form>
 			</div>
+			<ToastContainer
+				position='bottom-left'
+				autoClose={1500}
+				hideProgressBar={false}
+				limit={1}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme='dark'
+			/>
 		</div>
 	);
 };
