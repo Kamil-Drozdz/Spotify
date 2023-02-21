@@ -29,19 +29,19 @@ export const HomePage: React.FC = () => {
 		<div className='container'>
 			<div className='login-section'>
 				<h1 className='title'>Spotify</h1>
-				<p className='text'>Please log in to Spotify to continue</p>
+				<p className='text-message'>Please sign in to Spotify to continue.</p>
 				<div className='buttons'>
 					<a className='button-facebook'>
 						<img src={logoFacebook} />
-						Log in with facebook
+						Sign in with Facebook
 					</a>
 					<a className='button-apple'>
 						<img src={logoApple} />
-						Log in with Apple
+						Sign in with Apple
 					</a>
 					<a className='button-google'>
 						<img src={logoGoogle} />
-						Log in with Google
+						Sign in with Google
 					</a>
 				</div>
 				<p className='separator'>or</p>
@@ -54,7 +54,7 @@ export const HomePage: React.FC = () => {
 							onChange={event => setEmail(event.target.value)}
 						/>
 					</label>
-					<label className='input-text'>
+					<label className='input-text-password'>
 						Password
 						<input
 							placeholder='Password'
@@ -74,7 +74,7 @@ export const HomePage: React.FC = () => {
 							<p>Remember me</p>
 						</label>
 
-						<button className='button-log-in'>Log in</button>
+						<button className='button-log-in'>Sign up</button>
 					</div>
 				</form>
 				<div>
