@@ -119,6 +119,7 @@ export const RegisterPage: React.FC = () => {
 							min='0'
 							value={formValues.dobDay}
 							onChange={handleChange}
+							required
 						/>
 
 						<input
@@ -128,6 +129,7 @@ export const RegisterPage: React.FC = () => {
 							placeholder='YYYY'
 							value={formValues.dobYear}
 							onChange={handleChange}
+							required
 						/>
 					</div>
 
@@ -156,6 +158,7 @@ export const RegisterPage: React.FC = () => {
 									value='male'
 									checked={formValues.gender === 'male'}
 									onChange={handleChange}
+									required
 								/>
 								Male
 							</label>
@@ -167,6 +170,7 @@ export const RegisterPage: React.FC = () => {
 									value='female'
 									checked={formValues.gender === 'female'}
 									onChange={handleChange}
+									required
 								/>
 								Female
 							</label>
@@ -178,6 +182,7 @@ export const RegisterPage: React.FC = () => {
 									value='non-binary'
 									checked={formValues.gender === 'non-binary'}
 									onChange={handleChange}
+									required
 								/>
 								Unanswered
 							</label>
