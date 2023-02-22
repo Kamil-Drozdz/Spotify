@@ -1,5 +1,7 @@
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import React, { useState } from 'react';
+import logoFacebook from '../../../../assets/images/icons8-facebook-30.png';
+import logoGoogle from '../../../../assets/images/icons8-google-30.png';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../firebase.js';
 import './RegisterPage.scss';
@@ -9,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 interface FormValues {
 	displayName: string;
 	email: string;
+	confirmEmail: string;
 	password: string;
 	dobMonth: string;
 	dobDay: string;
@@ -22,6 +25,7 @@ export const RegisterPage: React.FC = () => {
 	const [formValues, setFormValues] = useState<FormValues>({
 		displayName: '',
 		email: '',
+		confirmEmail: '',
 		password: '',
 		dobMonth: '',
 		dobDay: '',
@@ -46,6 +50,9 @@ export const RegisterPage: React.FC = () => {
 			}));
 		}
 	};
+	function handleLoginClick() {
+		navigate('/');
+	}
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -67,16 +74,23 @@ export const RegisterPage: React.FC = () => {
 	return (
 		<div className='container'>
 			<div className='register-section'>
+				<h1 className='title'>Spotify</h1>
+				<p className='text-message'>Sign up for free to start listening.</p>
+				<div className='buttons'>
+					<a className='button-facebook'>
+						<img src={logoFacebook} />
+						Sign in with Facebook
+					</a>
+					<a className='button-google'>
+						<img src={logoGoogle} />
+						Sign in with Google
+					</a>
+				</div>
+				<p className='separator'>or</p>
+				<a href='#' className='button-log-in'>
+					Sign up wiuth your email adress
+				</a>
 				<form onSubmit={handleSubmit}>
-					<label htmlFor='displayName'>Whats your name?</label>
-					<input
-						type='text'
-						id='displayName'
-						placeholder='Enter your name'
-						name='displayName'
-						value={formValues.displayName}
-						onChange={handleChange}
-					/>
 					<label htmlFor='email'>Whats your email?</label>
 					<input
 						placeholder='Enter your email'
@@ -84,6 +98,15 @@ export const RegisterPage: React.FC = () => {
 						id='email'
 						name='email'
 						value={formValues.email}
+						onChange={handleChange}
+					/>
+					<label htmlFor='confirmEmail'>Confirm your email</label>
+					<input
+						placeholder='Enter your email again'
+						type='email'
+						id='confirmEmail'
+						name='confirmEmail'
+						value={formValues.confirmEmail}
 						onChange={handleChange}
 					/>
 					<label htmlFor='password'>Password</label>
@@ -95,9 +118,24 @@ export const RegisterPage: React.FC = () => {
 						value={formValues.password}
 						onChange={handleChange}
 					/>
+					<label htmlFor='displayName'>What should we call you</label>
+					<input
+						type='text'
+						id='displayName'
+						placeholder='Enter a profile name'
+						name='displayName'
+						value={formValues.displayName}
+						onChange={handleChange}
+					/>
+					<p className='info'>This appears on your profile</p>
 
-					<label htmlFor='dob-month'>Whats your date of birth?</label>
+					<label className='info-birth' htmlFor='dob-month'>
+						Whats your date of birth?
+					</label>
 					<div className='dob-inputs'>
+						<label className='input-date' htmlFor='dob-month'>
+							Month
+						</label>
 						<select id='dob-month' name='dobMonth' value={formValues.dobMonth} onChange={handleChange}>
 							<option value='' disabled>
 								Month
@@ -115,7 +153,9 @@ export const RegisterPage: React.FC = () => {
 							<option value='11'>November</option>
 							<option value='12'>December</option>
 						</select>
-
+						<label className='input-date' htmlFor='dob-day'>
+							Day
+						</label>
 						<input
 							type='number'
 							id='dob-day'
@@ -126,7 +166,9 @@ export const RegisterPage: React.FC = () => {
 							onChange={handleChange}
 							required
 						/>
-
+						<label className='input-date' htmlFor='dob-year'>
+							Year
+						</label>
 						<input
 							type='number'
 							id='dob-year'
@@ -136,20 +178,6 @@ export const RegisterPage: React.FC = () => {
 							onChange={handleChange}
 							required
 						/>
-					</div>
-
-					<div className='form-checkbox'>
-						<input
-							type='checkbox'
-							min='0'
-							id='marketing-checkbox'
-							name='marketingConsent'
-							checked={formValues.marketingConsent}
-							onChange={handleChange}
-						/>
-						<label htmlFor='marketing-checkbox'>
-							Share my registration date with Spotifys content providers for marketing purposes.
-						</label>
 					</div>
 
 					<label htmlFor='gender'>Whats your gender?</label>
@@ -189,13 +217,57 @@ export const RegisterPage: React.FC = () => {
 									onChange={handleChange}
 									required
 								/>
-								Unanswered
+								Non-binary
+							</label>
+							<label>
+								<input
+									type='radio'
+									id='other'
+									name='gender'
+									value='other'
+									checked={formValues.gender === 'other'}
+									onChange={handleChange}
+									required
+								/>
+								Other
 							</label>
 						</div>
 					</div>
+
+					<div className='form-checkbox'>
+						<input
+							type='checkbox'
+							min='0'
+							id='marketing-checkbox'
+							name='marketingConsent'
+							checked={formValues.marketingConsent}
+							onChange={handleChange}
+						/>
+						<label htmlFor='marketing-checkbox'>
+							Share my registration date with Spotifys content providers for marketing purposes.
+						</label>
+					</div>
+					<p className='info-terms'>
+						By clicking on sing-up. you afree to Spotifys{' '}
+						<a className='info-terms-anchor' href='#'>
+							Terms and Conditions of Use.
+						</a>
+					</p>
+					<p className='info-terms'>
+						To learn more about how. Spotify collects,uses,shares, and proctects your personal data,please see{' '}
+						<a className='info-terms-anchor' href='#'>
+							Spotifys Privacy Policy.
+						</a>
+					</p>
+
 					<p className='error'>{error}</p>
-					<button type='submit'>Register</button>
+					<button className='submit-button' type='submit'>
+						Sign up
+					</button>
 				</form>
+				<p className='login-link'>
+					Have an account? <a onClick={handleLoginClick}>log in</a>
+				</p>
 			</div>
 			<ToastContainer
 				position='bottom-left'

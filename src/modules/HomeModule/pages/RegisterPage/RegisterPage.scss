@@ -2,13 +2,113 @@
 	color: black;
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
-	width: 100vw;
+	height: auto;
+	width: auto;
 
 	justify-content: center;
 	align-items: center;
 	.register-section {
 		width: 20%;
+		.title {
+			margin-top: 30px;
+			padding-bottom: 20px;
+			width: 100%;
+			display: flex;
+			font-size: 24px;
+			font-weight: bold;
+			align-items: center;
+			justify-content: center;
+		}
+		.text-message {
+			font-size: 30px;
+			width: 90%;
+			text-align: center;
+			font-weight: 600;
+		}
+		.buttons {
+			margin-top: 40px;
+			display: flex;
+			flex-direction: column;
+
+			.button-facebook {
+				img {
+					margin-right: 14px;
+				}
+				&:hover {
+					background-color: #3c4f7d;
+				}
+				&:active {
+					opacity: 50%;
+				}
+				display: flex;
+				cursor: pointer;
+				align-items: center;
+				justify-content: center;
+				background-color: #445a90;
+				border-radius: 50px;
+				border: solid 1px black;
+				padding: 8px;
+				font-size: 14px;
+				font-weight: 600;
+				width: 92%;
+				color: white;
+				margin-bottom: 15px;
+			}
+			.button-google {
+				img {
+					scale: 0.8;
+					margin-right: 12px;
+				}
+				&:hover {
+					background-color: #e0dbdb;
+					border: solid 1px #000000;
+				}
+				&:active {
+					opacity: 50%;
+				}
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				width: 92%;
+				font-size: 14px;
+				font-weight: 400;
+				background-color: white;
+				border-radius: 50px;
+				border: solid 1px rgb(88, 85, 85);
+				padding: 8px;
+				color: black;
+				margin-bottom: 10px;
+			}
+		}
+		.separator {
+			color: rgb(88, 85, 85);
+			text-align: center;
+			display: flex;
+			opacity: 0.4;
+			margin-bottom: 25px;
+			justify-content: center;
+			align-items: center;
+
+			&::before,
+			&::after {
+				margin: 0 6px;
+				width: 100%;
+				content: '';
+				border: 0.5px solid rgb(145, 140, 140);
+			}
+		}
+		.button-log-in {
+			text-decoration: none;
+			color: black;
+			width: 100%;
+			display: flex;
+			font-size: 14px;
+			font-weight: bold;
+			cursor: pointer;
+			justify-content: center;
+			margin-bottom: 30px;
+		}
 		form {
 			width: 100%;
 			display: flex;
@@ -16,18 +116,18 @@
 			justify-content: center;
 			label {
 				font-weight: bold;
-				font-size: 14px;
-				margin-bottom: 0.5rem;
+				font-size: 12px;
+				margin-bottom: 0.7rem;
 			}
 
 			input,
 			select {
-				padding: 0.5rem;
+				padding: 0.8rem;
 				border: 1px solid #ccc;
 				border-radius: 50px;
-				margin-bottom: 1rem;
-				width: 90%;
-				font-size: 14px;
+				margin-bottom: 2rem;
+				width: 85%;
+				font-size: 12px;
 				padding-left: 20px;
 			}
 
@@ -44,14 +144,29 @@
 					margin-right: 0.5rem;
 				}
 			}
-
+			.info {
+				font-size: 12px;
+				margin-top: -20px;
+				margin-bottom: 30px;
+			}
+			.info-birth {
+				margin-bottom: 30px;
+			}
+			.input-date {
+				position: relative;
+				font-size: 12px;
+				left: 20px;
+				top: -20px;
+			}
 			.radio-buttons {
-				display: flex;
 				margin-top: 10px;
-				justify-content: space-evenly;
-				align-items: center;
-				width: 100%;
-				label {
+				input[type='radio'] {
+					font-size: 12px;
+					padding: 0px;
+					margin-bottom: 0px;
+					width: auto;
+					margin-right: 10px;
+					margin-left: 10px;
 				}
 			}
 			.form-checkbox {
@@ -65,15 +180,26 @@
 					width: 10%;
 				}
 			}
+			.info-terms {
+				width: 100%;
+				font-size: 11px;
+				text-align: center;
+				.info-terms-anchor {
+					color: #1db954;
+				}
+			}
 			.error {
 				color: red;
 			}
-			button[type='submit'] {
+			.submit-button {
 				width: 40%;
+				justify-content: center;
+				display: flex;
+				margin: 0 30%;
 				background-color: #65d36e;
 				border-radius: 50px;
 				border: none;
-				padding: 8px 10%;
+				padding: 16px 2px;
 				font-weight: bold;
 				margin-bottom: 30px;
 				cursor: pointer;
@@ -83,6 +209,17 @@
 				&:active {
 					opacity: 50%;
 				}
+			}
+		}
+		.login-link {
+			white-space: nowrap;
+			width: 40%;
+			margin: 0 30%;
+			font-size: 14px;
+			margin-bottom: 30px;
+			a {
+				cursor: pointer;
+				color: #1db954;
 			}
 		}
 	}
