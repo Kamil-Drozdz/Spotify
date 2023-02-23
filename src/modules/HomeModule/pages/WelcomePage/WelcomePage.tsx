@@ -8,15 +8,12 @@ const WelcomePage: React.FC = () => {
 	const handleLogout = async () => {
 		try {
 			await auth.signOut();
-			localStorage.removeItem('user');
-
 			navigate('/');
 		} catch (error) {
 			console.error(error);
 		}
 	};
-	const idToken: any = localStorage.getItem('firebase');
-	console.log(JSON.parse(idToken));
+
 	return (
 		<div className='container'>
 			<p className='welcome'>
