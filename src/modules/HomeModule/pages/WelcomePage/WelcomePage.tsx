@@ -15,7 +15,8 @@ const WelcomePage: React.FC = () => {
 			console.error(error);
 		}
 	};
-
+	const idToken: any = localStorage.getItem('firebase');
+	console.log(JSON.parse(idToken));
 	return (
 		<div className='container'>
 			<p className='welcome'>

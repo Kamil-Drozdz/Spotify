@@ -19,10 +19,23 @@ interface FormValues {
 	dobYear: string;
 	marketingConsent: boolean;
 	gender: string;
+	info?: string;
 }
 
 export const RegisterPage: React.FC = () => {
-	const [error, setError] = useState('');
+	const [error, setError] = useState<FormValues>({
+		displayName: '',
+		email: '',
+		confirmEmail: '',
+		password: '',
+		dobMonth: '',
+		dobDay: '',
+		dobYear: '',
+		marketingConsent: false,
+		gender: '',
+		info: '',
+	});
+
 	const [formValues, setFormValues] = useState<FormValues>({
 		displayName: '',
 		email: '',
@@ -33,7 +46,12 @@ export const RegisterPage: React.FC = () => {
 		dobYear: '',
 		marketingConsent: false,
 		gender: '',
+		info: '',
 	});
+	let errorMsg = '';
+	const MIN_DISPLAYNAME_LENGTH = 3;
+	const MIN_PASSWORD_LENGTH = 6;
+	const PASSWORD_PATTERN = /^(?=.*[A-Z]).{6,}$/;
 	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
 
@@ -46,22 +64,45 @@ export const RegisterPage: React.FC = () => {
 				[name]: checked,
 			}));
 		} else {
+			if (name === 'email') {
+				const emailRegex = /^\S+@\S+\.\S+$/;
+				if (!emailRegex.test(value)) {
+					errorMsg = 'Please enter a valid email address';
+				}
+			} else if (name === 'confirmEmail') {
+				if (value !== formValues.email) {
+					errorMsg = 'Email addresses do not match';
+				}
+			} else if (name === 'password') {
+				if (value.length < MIN_PASSWORD_LENGTH) {
+					errorMsg = `Password must be at least ${MIN_PASSWORD_LENGTH} characters`;
+				} else if (!PASSWORD_PATTERN.test(value)) {
+					errorMsg = 'Password must contain at least one uppercase letter';
+				}
+			} else if (name === 'displayName') {
+				if (value.length < MIN_DISPLAYNAME_LENGTH) {
+					errorMsg = `Name must be at least ${MIN_DISPLAYNAME_LENGTH} characters`;
+				}
+			}
+
 			setFormValues(prevValues => ({
 				...prevValues,
 				[name]: value,
 			}));
+
+			setError(prevErrors => ({
+				...prevErrors,
+				[name]: errorMsg,
+			}));
 		}
 	};
+
 	function handleLoginClick() {
 		navigate('/');
 	}
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		if (formValues.email !== formValues.confirmEmail) {
-			setError('Email and confirm email must match');
-			return;
-		}
 		setIsLoading(true);
 		try {
 			const user = await createUserWithEmailAndPassword(auth, formValues.email, formValues.password);
@@ -74,7 +115,10 @@ export const RegisterPage: React.FC = () => {
 				navigate('/');
 			}, 2500);
 		} catch (error: any) {
-			setError(error.message);
+			setError(prevErrors => ({
+				...prevErrors,
+				info: error.message,
+			}));
 		}
 		setIsLoading(false);
 	};
@@ -108,6 +152,7 @@ export const RegisterPage: React.FC = () => {
 						value={formValues.email}
 						onChange={handleChange}
 					/>
+					<p className='input-error'>{error.email}</p>
 					<label htmlFor='confirmEmail'>Confirm your email</label>
 					<input
 						placeholder='Enter your email again'
@@ -117,6 +162,7 @@ export const RegisterPage: React.FC = () => {
 						value={formValues.confirmEmail}
 						onChange={handleChange}
 					/>
+					<p className='input-error'>{error.confirmEmail}</p>
 					<label htmlFor='password'>Password</label>
 					<input
 						placeholder='Enter your password'
@@ -125,7 +171,9 @@ export const RegisterPage: React.FC = () => {
 						name='password'
 						value={formValues.password}
 						onChange={handleChange}
+						minLength={MIN_PASSWORD_LENGTH}
 					/>
+					<p className='input-error'>{error.password}</p>
 					<label htmlFor='displayName'>What should we call you</label>
 					<input
 						type='text'
@@ -134,7 +182,9 @@ export const RegisterPage: React.FC = () => {
 						name='displayName'
 						value={formValues.displayName}
 						onChange={handleChange}
+						minLength={MIN_DISPLAYNAME_LENGTH}
 					/>
+					<p className='input-error'>{error.displayName}</p>
 					<p className='info'>This appears on your profile</p>
 
 					<label className='info-birth' htmlFor='dob-month'>
@@ -170,6 +220,7 @@ export const RegisterPage: React.FC = () => {
 							name='dobDay'
 							placeholder='DD'
 							min='0'
+							max='31'
 							value={formValues.dobDay}
 							onChange={handleChange}
 							required
@@ -182,11 +233,14 @@ export const RegisterPage: React.FC = () => {
 							id='dob-year'
 							name='dobYear'
 							placeholder='YYYY'
+							min='1900'
+							max='2050'
 							value={formValues.dobYear}
 							onChange={handleChange}
 							required
 						/>
 					</div>
+					<p className='input-error'>{error.dobMonth}</p>
 
 					<label htmlFor='gender'>Whats your gender?</label>
 					<div>
@@ -239,6 +293,7 @@ export const RegisterPage: React.FC = () => {
 								/>
 								Other
 							</label>
+							<p className='input-error'>{error.gender}</p>
 						</div>
 					</div>
 
@@ -250,10 +305,12 @@ export const RegisterPage: React.FC = () => {
 							name='marketingConsent'
 							checked={formValues.marketingConsent}
 							onChange={handleChange}
+							required
 						/>
 						<label htmlFor='marketing-checkbox'>
 							Share my registration date with Spotifys content providers for marketing purposes.
 						</label>
+						<p className='input-error'>{error.marketingConsent}</p>
 					</div>
 					<p className='info-terms'>
 						By clicking on sing-up. you afree to Spotifys{' '}
@@ -268,7 +325,7 @@ export const RegisterPage: React.FC = () => {
 						</a>
 					</p>
 
-					<p className='error'>{error}</p>
+					<p className='error'>{error.info}</p>
 					{isLoading ? (
 						<div className='spinner'>
 							<RotatingLines strokeColor='green' strokeWidth='5' animationDuration='0.55' width='48' visible={true} />

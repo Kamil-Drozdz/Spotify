@@ -1,34 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './HomePage.scss';
 import logoFacebook from '../../../../assets/images/icons8-facebook-30.png';
 import logoApple from '../../../../assets/images/Apple-logo.png';
 import logoGoogle from '../../../../assets/images/icons8-google-30.png';
-import { auth } from '../../../firebase.js';
-import { signInWithEmailAndPassword, browserSessionPersistence, setPersistence } from 'firebase/auth';
+import { AuthContext } from '../../../Auth';
 
 export const HomePage: React.FC = () => {
-	const [email, setEmail] = useState('username1@example.com');
-	const [password, setPassword] = useState('Form123');
-	const [error, setError] = useState('');
-	const [authPersistence, setAuthPersistence] = useState(false);
-	const navigate = useNavigate();
-
-	const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		if (!authPersistence) {
-			setPersistence(auth, browserSessionPersistence);
-			console.log(auth, browserSessionPersistence);
-		}
-		await signInWithEmailAndPassword(auth, email, password)
-			.then(userCredential => {
-				const user = userCredential.user;
-				navigate('/welcome');
-			})
-			.catch(error => {
-				setError(error.message);
-			});
-	};
+	interface Auth {
+		user: string;
+		email: string;
+		setEmail: (email: string) => void;
+		setPassword: (password: string) => void;
+		password: string;
+		error: string;
+		setRememberMe: (rememberMe: boolean) => void;
+		handleLogin: () => void;
+		rememberMe: boolean;
+	}
+	const { user, email, setEmail, setPassword, password, error, setRememberMe, handleLogin, rememberMe } = useContext(
+		AuthContext
+	) as Auth;
 
 	return (
 		<div className='container'>
@@ -75,11 +67,7 @@ export const HomePage: React.FC = () => {
 					{error && <p className='error'>{error}</p>}
 					<div className='login'>
 						<label className='input-remember-me'>
-							<input
-								onClick={event => setAuthPersistence(!authPersistence)}
-								className='checkbox-remember-me'
-								type='checkbox'
-							/>
+							<input onClick={event => setRememberMe(!rememberMe)} className='checkbox-remember-me' type='checkbox' />
 							<p>Remember me</p>
 						</label>
 

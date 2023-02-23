@@ -133,7 +133,15 @@
 				font-size: 12px;
 				padding-left: 20px;
 			}
-
+			input:invalid {
+				border: 1px solid red;
+			}
+			.input-error {
+				color: red;
+				position: relative;
+				font-size: 12px;
+				top: -35px;
+			}
 			input[type='number'] {
 				max-width: 3rem;
 				margin-right: 0.5rem;
