@@ -8,6 +8,8 @@ const WelcomePage: React.FC = () => {
 	const handleLogout = async () => {
 		try {
 			await auth.signOut();
+			localStorage.removeItem('user');
+
 			navigate('/');
 		} catch (error) {
 			console.error(error);

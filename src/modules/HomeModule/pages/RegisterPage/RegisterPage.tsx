@@ -7,6 +7,7 @@ import { auth } from '../../../firebase.js';
 import './RegisterPage.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { RotatingLines } from 'react-loader-spinner';
 
 interface FormValues {
 	displayName: string;
@@ -33,6 +34,7 @@ export const RegisterPage: React.FC = () => {
 		marketingConsent: false,
 		gender: '',
 	});
+	const [isLoading, setIsLoading] = useState(false);
 	const navigate = useNavigate();
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -56,6 +58,11 @@ export const RegisterPage: React.FC = () => {
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		if (formValues.email !== formValues.confirmEmail) {
+			setError('Email and confirm email must match');
+			return;
+		}
+		setIsLoading(true);
 		try {
 			const user = await createUserWithEmailAndPassword(auth, formValues.email, formValues.password);
 			const userCurrent: any = auth.currentUser;
@@ -69,6 +76,7 @@ export const RegisterPage: React.FC = () => {
 		} catch (error: any) {
 			setError(error.message);
 		}
+		setIsLoading(false);
 	};
 
 	return (
@@ -261,9 +269,15 @@ export const RegisterPage: React.FC = () => {
 					</p>
 
 					<p className='error'>{error}</p>
-					<button className='submit-button' type='submit'>
-						Sign up
-					</button>
+					{isLoading ? (
+						<div className='spinner'>
+							<RotatingLines strokeColor='green' strokeWidth='5' animationDuration='0.55' width='48' visible={true} />
+						</div>
+					) : (
+						<button className='submit-button' type='submit'>
+							Sign up
+						</button>
+					)}
 				</form>
 				<p className='login-link'>
 					Have an account? <a onClick={handleLoginClick}>log in</a>
