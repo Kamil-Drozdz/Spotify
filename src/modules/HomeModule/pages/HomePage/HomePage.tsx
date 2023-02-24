@@ -67,7 +67,7 @@ export const HomePage: React.FC = () => {
 					{error && <p className='error'>{error}</p>}
 					<div className='login'>
 						<label className='input-remember-me'>
-							<input onClick={event => setRememberMe(!rememberMe)} className='checkbox-remember-me' type='checkbox' />
+							<input onClick={() => setRememberMe(!rememberMe)} className='checkbox-remember-me' type='checkbox' />
 							<p>Remember me</p>
 						</label>
 
