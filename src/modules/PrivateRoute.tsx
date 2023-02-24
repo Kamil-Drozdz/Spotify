@@ -6,12 +6,15 @@ interface PrivateRouteProps {
 	children?: React.ReactNode;
 }
 interface User {
-	email?: string;
+	user?: {
+		email: string;
+	};
 }
+
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
 	const user = useContext<User>(AuthContext);
 
-	if (user.email) {
+	if (user?.user?.email) {
 		return <Outlet />;
 	} else {
 		return <Navigate to='/' />;
