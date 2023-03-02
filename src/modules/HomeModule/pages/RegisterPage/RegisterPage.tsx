@@ -223,7 +223,6 @@ export const RegisterPage: React.FC = () => {
 							max='31'
 							value={formValues.dobDay}
 							onChange={handleChange}
-							required
 						/>
 						<label className='input-date' htmlFor='dob-year'>
 							Year
@@ -237,7 +236,6 @@ export const RegisterPage: React.FC = () => {
 							max='2050'
 							value={formValues.dobYear}
 							onChange={handleChange}
-							required
 						/>
 					</div>
 					<p className='input-error'>{error.dobMonth}</p>
