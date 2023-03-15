@@ -17,27 +17,56 @@ type AuthProviderProps = {
 };
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-	const [user, setUser] = useState<any| null>(null);
+	const [user, setUser] = useState<any | null>(null);
 	const [pending, setPending] = useState<boolean>(true);
 	const [rememberMe, setRememberMe] = useState(false);
 	const [email, setEmail] = useState('');
+	const [accessToken, setAccessToken] = useState<string | null>(null);
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 	const navigate = useNavigate();
 
 	const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log(email, password);
 		await signInWithEmailAndPassword(auth, email, password)
 			.then(userCredential => {
 				const user = userCredential.user;
-				console.log(user);
 				navigate('/welcome');
 			})
 			.catch(error => {
 				setError(error.message);
 			});
 	};
+
+	const getSpotifyAccessToken = async (): Promise<string | undefined | null> => {
+		try {
+			const response = await fetch('https://accounts.spotify.com/api/token', {
+				method: 'POST',
+				body: 'grant_type=client_credentials',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					Authorization: `Basic ${btoa(
+						`${import.meta.env.VITE_SPOTIFY_CLIENT_ID}:${import.meta.env.VITE_SPOTIFY_CLIENT_SECRET}`
+					)}`,
+				},
+			});
+			if (response.ok) {
+				const data = await response.json();
+				setAccessToken(data?.access_token);
+			} else {
+				throw new Error(`Error getting Spotify access token: ${response.statusText}`);
+			}
+		} catch (error) {
+			console.error('Error getting Spotify access token:', error);
+		}
+	};
+
+	console.log(accessToken);
+	useEffect(() => {
+		if (user) {
+			getSpotifyAccessToken();
+		}
+	}, [user]);
 
 	useEffect(() => {
 		const persistenceType = rememberMe ? browserLocalPersistence : browserSessionPersistence;
@@ -73,7 +102,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 	return (
 		<AuthContext.Provider
-			value={{ user, email, setEmail, setPassword, password, rememberMe, error, setRememberMe, handleLogin }}>
+			value={{
+				user,
+				email,
+				accessToken,
+				setEmail,
+				setPassword,
+				password,
+				rememberMe,
+				error,
+				setRememberMe,
+				handleLogin,
+			}}>
 			{children}
 		</AuthContext.Provider>
 	);
