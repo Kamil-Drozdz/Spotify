@@ -4,7 +4,7 @@ body {
 	margin: 0;
 	font-family: 'Lato', sans-serif;
 }
-.container {
+.home-page {
 	color: black;
 	display: flex;
 	flex-direction: column;
@@ -13,16 +13,18 @@ body {
 	overflow-x: hidden;
 	justify-content: center;
 	align-items: center;
-	.login-section {
+
+	&__login-section {
 		min-width: 230px;
 		width: 20%;
-		.title {
+
+		&__title {
 			font-size: 24px;
 			display: flex;
 			justify-content: center;
 			letter-spacing: -1px;
 		}
-		.text-message {
+		&__text-message {
 			font-size: 14px;
 			font-weight: bold;
 			display: flex;
@@ -34,105 +36,97 @@ body {
 			justify-content: center;
 			color: black;
 		}
-		.text {
+		&__text {
 			font-weight: bold;
 			display: flex;
 			justify-content: center;
 			color: black;
+			cursor: default;
 			text-decoration: none;
 			margin-top: 30px;
 		}
-		.buttons {
+		&__buttons {
 			position: relative;
 			top: 12px;
 			left: 8px;
 			display: flex;
 			flex-direction: column;
 
-			.button-facebook {
-				img {
-					margin-right: 14px;
-				}
-				&:hover {
-					background-color: #3c4f7d;
-				}
-				&:active {
-					opacity: 50%;
-				}
-				transition: 0.3s;
-				display: flex;
-				cursor: pointer;
-				align-items: center;
-				justify-content: center;
-				background-color: #445a90;
+			&__button {
 				border-radius: 50px;
-				border: solid 1px black;
+				font-size: 14px;
 				padding: 8px;
-				font-size: 14px;
-				font-weight: 600;
-				width: 92%;
-				color: white;
-			}
-			.button-apple {
-				width: 89%;
-				img {
-					margin-right: 12px;
-					width: 18px;
-					height: 18px;
-					object-fit: contain;
-				}
-				&:hover {
-					background-color: #191919;
-					border: solid 1px #000000;
-				}
-				&:active {
-					opacity: 50%;
-				}
+				margin-top: 8px;
 				transition: 0.3s;
-				display: flex;
-				align-items: center;
 				cursor: pointer;
-				justify-content: center;
-				margin: 16px 0px;
-				background-color: rgb(46, 45, 45);
-				border-radius: 50px;
-				border: solid 1px black;
-				padding: 14px;
-				font-size: 14px;
-				font-weight: 400;
-				color: white;
-			}
-			.button-google {
-				img {
-					scale: 0.8;
-					margin-right: 12px;
-				}
-				&:hover {
-					background-color: #e0dbdb;
-					border: solid 1px #000000;
-				}
-				&:active {
-					opacity: 50%;
-				}
-				transition: 0.3s;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				cursor: pointer;
-				width: 92%;
-				font-size: 14px;
-				font-weight: 400;
-				background-color: white;
-				border-radius: 50px;
-				border: solid 1px rgb(88, 85, 85);
-				padding: 8px;
-				color: black;
+
+				&--facebook {
+					img {
+						margin-right: 14px;
+					}
+					&:hover {
+						background-color: #3c4f7d;
+					}
+					&:active {
+						opacity: 50%;
+					}
+					background-color: #445a90;
+					border: solid 1px black;
+					width: 92%;
+					color: white;
+					font-weight: 600;
+				}
+
+				&--apple {
+					width: 89%;
+					img {
+						margin-right: 12px;
+						width: 18px;
+						height: 18px;
+						object-fit: contain;
+					}
+					&:hover {
+						background-color: #191919;
+						border: solid 1px #000000;
+					}
+					&:active {
+						opacity: 50%;
+					}
+					background-color: rgb(46, 45, 45);
+					border: solid 1px black;
+					padding: 14px;
+					font-weight: 400;
+					color: white;
+				}
+
+				&--google {
+					img {
+						scale: 0.8;
+						margin-right: 12px;
+					}
+					&:hover {
+						background-color: #e0dbdb;
+						border: solid 1px #000000;
+					}
+					&:active {
+						opacity: 50%;
+					}
+					background-color: white;
+					border: solid 1px rgb(88, 85, 85);
+					width: 92%;
+					font-weight: 400;
+					color: black;
+				}
 			}
 		}
-		.form-log-in {
+		&__form-log-in {
 			margin-top: -16px;
 		}
-		.separator {
+		&__separator {
+			width: 95%;
 			color: rgb(88, 85, 85);
 			text-align: center;
 			padding: 23px 0;
@@ -149,13 +143,13 @@ body {
 				border: 0.5px solid rgb(145, 140, 140);
 			}
 		}
-		.input-text {
+		&__input-text {
 			color: black;
 			font-weight: bold;
 			font-size: 11px;
 			margin-left: 5px;
 		}
-		.input-text-password {
+		&__input-text-password {
 			color: black;
 			font-weight: bold;
 			font-size: 11px;
@@ -175,18 +169,18 @@ body {
 			margin-left: 5px;
 			margin-bottom: 10px;
 		}
-		.reset-password-link {
+		&__reset-password-link {
 			position: relative;
 			text-decoration: underline;
 			top: 30px;
 			font-size: 12px;
 			color: black;
 		}
-		.login {
+		&__login {
 			width: 100%;
 			display: flex;
 			justify-content: space-between;
-			.input-remember-me {
+			&__remember-me {
 				white-space: nowrap;
 				display: flex;
 				font-size: 11px;
@@ -194,13 +188,15 @@ body {
 				font-weight: bold;
 				justify-content: center;
 				align-items: center;
-				.checkbox-remember-me {
+
+				&__checkbox {
 					accent-color: #65d36e;
 					cursor: pointer;
 					margin-right: 20px;
 				}
 			}
-			.button-log-in {
+
+			&__button-log-in {
 				transition: 0.3s;
 				background-color: #65d36e;
 				border-radius: 50px;
@@ -212,9 +208,11 @@ body {
 				margin-top: 55px;
 				margin-bottom: 30px;
 				cursor: pointer;
+
 				&:hover {
 					background-color: #4ecf58;
 				}
+
 				&:active {
 					opacity: 50%;
 				}
@@ -222,11 +220,11 @@ body {
 			border-bottom: 1px solid rgb(167, 165, 165, 0.4);
 			margin-bottom: 10px;
 		}
-		.error {
+		&__error {
 			margin-top: 35px;
 			color: red;
 		}
-		.button-register {
+		&__button-register {
 			transition: 0.3s;
 			cursor: pointer;
 			margin-top: 20px;
@@ -252,10 +250,11 @@ body {
 }
 
 @media only screen and (max-width: 1023px) {
-	.container {
+	.home-page {
 		justify-content: flex-start;
 		padding-bottom: 20%;
-		.login-section {
+
+		&__login-section {
 			width: 80%;
 			max-width: 600px;
 		}

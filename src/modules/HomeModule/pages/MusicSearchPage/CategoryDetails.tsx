@@ -3,6 +3,10 @@ import { useSpotify } from '../../../customHooks/useSpotify';
 import { useParams } from 'react-router-dom';
 import { PlaylistDetails } from './PlaylistDetails';
 
+interface CategoryIdDetails {
+	[categoryId: string]: string;
+}
+
 interface Playlist {
 	id: string;
 	name: string;
@@ -11,17 +15,19 @@ interface Playlist {
 const CategoryDetails: React.FC = () => {
 	const [playlists, setPlaylists] = useState<Playlist[]>([]);
 	const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(null);
-	const { getCategoryPlaylists } = useSpotify();
-	const { categoryId } = useParams<{ categoryId: string }>();
-
+	const { getCategoryPlaylists, isLoading } = useSpotify();
+	const { categoryId } = useParams<CategoryIdDetails>();
 	useEffect(() => {
-		const fetchPlaylists = async () => {
-			const fetchedPlaylists = await getCategoryPlaylists(categoryId);
-			setPlaylists(fetchedPlaylists);
-		};
-
-		fetchPlaylists();
-	}, [categoryId]);
+		if (!isLoading) {
+			const fetchPlaylists = async () => {
+				if (categoryId) {
+					const fetchedPlaylists = await getCategoryPlaylists(categoryId);
+					setPlaylists(fetchedPlaylists);
+				}
+			};
+			fetchPlaylists();
+		}
+	}, [categoryId, isLoading]);
 
 	const handlePlaylistClick = (playlistId: string) => {
 		setSelectedPlaylistId(playlistId);

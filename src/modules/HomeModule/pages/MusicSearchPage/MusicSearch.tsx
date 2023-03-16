@@ -1,5 +1,4 @@
-import React, { useContext, useState, ChangeEvent, useEffect } from 'react';
-import { AuthContext } from '../../../Auth';
+import React, { useState, useEffect } from 'react';
 import { useSpotify } from '../../../customHooks/useSpotify';
 import { useNavigate } from 'react-router-dom';
 import './MusicSearch.scss';
@@ -18,33 +17,51 @@ type Track = {
 		spotify: string;
 	};
 };
+type Category = {
+	id: number;
+	name: string;
+	icons: {
+		url: string;
+	}[];
+	href: string;
+};
 
 export const MusicSearch: React.FC = () => {
-	const { user } = useContext<any>(AuthContext);
 	const navigate = useNavigate();
 	const [query, setQuery] = useState<string>('');
 	const [tracks, setTracks] = useState<Track[]>([]);
-	const [categories, setCategories] = useState([]);
-	const { searchTracks, getCategories } = useSpotify();
+	const [categories, setCategories] = useState<Category[]>([]);
+
+	const [nextCategoriesUrl, setNextCategoriesUrl] = useState<string | null>(null);
+	const { searchTracks, getCategories, isLoading } = useSpotify();
 
 	useEffect(() => {
-		const fetchCategories = async () => {
-			const fetchedCategories = await getCategories();
-			setCategories(fetchedCategories);
-		};
+		if (!isLoading) {
+			const fetchCategories = async () => {
+				const fetchedCategories = await getCategories();
+				setCategories(fetchedCategories?.items);
+				setNextCategoriesUrl(fetchedCategories?.next);
+			};
 
-		fetchCategories();
-	}, []);
+			fetchCategories();
+		}
+	}, [isLoading]);
 
-	const handleSearch = async e => {
-		setQuery(e.target.value);
-		const results = await searchTracks(query);
-		setTracks(results);
+	const loadMoreCategories = async () => {
+		if (nextCategoriesUrl) {
+			const fetchedData = await getCategories(nextCategoriesUrl);
+			setCategories(prevCategories => [...prevCategories, ...fetchedData.items]);
+			setNextCategoriesUrl(fetchedData.next);
+		}
 	};
 
-	if (!user) {
-		return <div>You are not logged in.</div>;
-	}
+	const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		setQuery(e.target.value);
+		if (!isLoading) {
+			const results = await searchTracks(query);
+			setTracks(results);
+		}
+	};
 
 	return (
 		<>
@@ -52,12 +69,14 @@ export const MusicSearch: React.FC = () => {
 				<div key={category.id} onClick={() => navigate(`/categories/${category.id}`)}>
 					<h3>{category.name}</h3>
 					<img src={category.icons[0].url} alt={`Icon for ${category.name}`} />
-					<a href={category.href}>x</a>
 				</div>
 			))}
+			<button disabled={!nextCategoriesUrl} onClick={loadMoreCategories}>
+				Load more category
+			</button>
 			<div>
 				<input type='text' value={query} onChange={handleSearch} placeholder='Search for music' />
-
+				{tracks.length === 0 && <div>Ups, we dont have this track</div>}
 				{tracks.map(track => (
 					<div key={track.id}>
 						<h3>Track name: {track.name}</h3>

@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { auth } from './firebase.js';
+import Cookies from 'js-cookie';
 
 import { RotatingLines } from 'react-loader-spinner';
 import {
@@ -38,7 +39,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			});
 	};
 
-	const getSpotifyAccessToken = async (): Promise<string | undefined | null> => {
+	const getSpotifyAccessToken = async () => {
 		try {
 			const response = await fetch('https://accounts.spotify.com/api/token', {
 				method: 'POST',
@@ -53,18 +54,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			if (response.ok) {
 				const data = await response.json();
 				setAccessToken(data?.access_token);
+				console.log(data.expires_in);
+				Cookies.set('accessToken', data?.access_token, { expires: data?.expires_in / 3600 });
 			} else {
 				throw new Error(`Error getting Spotify access token: ${response.statusText}`);
 			}
 		} catch (error) {
 			console.error('Error getting Spotify access token:', error);
+			throw error;
 		}
 	};
 
-	console.log(accessToken);
 	useEffect(() => {
 		if (user) {
-			getSpotifyAccessToken();
+			const storedAccessToken = Cookies.get('accessToken');
+
+			if (storedAccessToken) {
+				setAccessToken(storedAccessToken);
+			} else {
+				getSpotifyAccessToken();
+			}
 		}
 	}, [user]);
 

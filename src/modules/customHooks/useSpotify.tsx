@@ -1,16 +1,23 @@
 import { AuthContext } from '../Auth';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-interface accessToken {
+interface AccessToken {
 	accessToken: string;
 }
 
 export const useSpotify = () => {
 	const { accessToken } = useContext(AuthContext) as AccessToken;
+	const [isLoading, setIsLoading] = useState(true);
 
-	const searchTracks = async (query: string): Promise<any[]> => {
+	useEffect(() => {
+		if (accessToken) {
+			setIsLoading(false);
+		}
+	}, [accessToken]);
+
+	const searchTracks = async (query: string) => {
 		if (!accessToken) {
-			return [];
+			return;
 		}
 
 		const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track`, {
@@ -21,21 +28,21 @@ export const useSpotify = () => {
 
 		if (response.ok) {
 			const data = await response.json();
-			return data.tracks.items;
+			return data?.tracks?.items;
 		} else {
 			throw new Error(`Error searching tracks: ${response.statusText}`);
 		}
 	};
 
-	const getCategories = async () => {
-		const response = await fetch('https://api.spotify.com/v1/browse/categories', {
+	const getCategories = async (url?: string) => {
+		const apiUrl = url || 'https://api.spotify.com/v1/browse/categories';
+		const response = await fetch(apiUrl, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 			},
 		});
-
 		const data = await response.json();
-		return data?.categories?.items;
+		return data?.categories;
 	};
 
 	const getCategoryPlaylists = async (categoryId: string) => {
@@ -51,10 +58,11 @@ export const useSpotify = () => {
 			}
 
 			const data = await response.json();
+			console.log(data);
 			return data?.playlists?.items;
 		} catch (error) {
 			console.error('Error fetching category playlists:', error);
-			return [];
+			return;
 		}
 	};
 	const getPlaylistTracks = async (playlistId: string) => {
@@ -73,11 +81,12 @@ export const useSpotify = () => {
 			return data?.items;
 		} catch (error) {
 			console.error('Error fetching playlist tracks:', error);
-			return [];
+			return;
 		}
 	};
 
 	return {
+		isLoading,
 		searchTracks,
 		getCategories,
 		getCategoryPlaylists,
