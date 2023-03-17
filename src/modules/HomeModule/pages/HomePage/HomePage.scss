@@ -1,3 +1,7 @@
+$color-primary: black;
+$color-secondary: white;
+$color-spotify: #65d36e;
+
 html,
 body {
 	height: 100%;
@@ -5,7 +9,7 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 .home-page {
-	color: black;
+	color: $color-primary;
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
@@ -14,7 +18,7 @@ body {
 	justify-content: center;
 	align-items: center;
 
-	&__login-section {
+	.login-section {
 		min-width: 230px;
 		width: 20%;
 
@@ -34,13 +38,13 @@ body {
 			left: 4px;
 			position: relative;
 			justify-content: center;
-			color: black;
+			color: $color-primary;
 		}
 		&__text {
 			font-weight: bold;
 			display: flex;
 			justify-content: center;
-			color: black;
+			color: $color-primary;
 			cursor: default;
 			text-decoration: none;
 			margin-top: 30px;
@@ -74,9 +78,9 @@ body {
 						opacity: 50%;
 					}
 					background-color: #445a90;
-					border: solid 1px black;
+					border: solid 1px $color-primary;
 					width: 92%;
-					color: white;
+					color: $color-secondary;
 					font-weight: 600;
 				}
 
@@ -90,16 +94,16 @@ body {
 					}
 					&:hover {
 						background-color: #191919;
-						border: solid 1px #000000;
+						border: solid 1px $color-primary;
 					}
 					&:active {
 						opacity: 50%;
 					}
 					background-color: rgb(46, 45, 45);
-					border: solid 1px black;
+					border: solid 1px $color-primary;
 					padding: 14px;
 					font-weight: 400;
-					color: white;
+					color: $color-secondary;
 				}
 
 				&--google {
@@ -109,16 +113,16 @@ body {
 					}
 					&:hover {
 						background-color: #e0dbdb;
-						border: solid 1px #000000;
+						border: solid 1px $color-primary;
 					}
 					&:active {
 						opacity: 50%;
 					}
-					background-color: white;
+					background-color: $color-secondary;
 					border: solid 1px rgb(88, 85, 85);
 					width: 92%;
 					font-weight: 400;
-					color: black;
+					color: $color-primary;
 				}
 			}
 		}
@@ -144,13 +148,13 @@ body {
 			}
 		}
 		&__input-text {
-			color: black;
+			color: $color-primary;
 			font-weight: bold;
 			font-size: 11px;
 			margin-left: 5px;
 		}
 		&__input-text-password {
-			color: black;
+			color: $color-primary;
 			font-weight: bold;
 			font-size: 11px;
 			position: relative;
@@ -168,13 +172,17 @@ body {
 			margin-top: 12px;
 			margin-left: 5px;
 			margin-bottom: 10px;
+			transition: 0.1s;
+			&:focus {
+				border: 3px solid rgb(145, 140, 140);
+			}
 		}
 		&__reset-password-link {
 			position: relative;
 			text-decoration: underline;
 			top: 30px;
 			font-size: 12px;
-			color: black;
+			color: $color-primary;
 		}
 		&__login {
 			width: 100%;
@@ -184,13 +192,13 @@ body {
 				white-space: nowrap;
 				display: flex;
 				font-size: 11px;
-				color: black;
+				color: $color-primary;
 				font-weight: bold;
 				justify-content: center;
 				align-items: center;
 
 				&__checkbox {
-					accent-color: #65d36e;
+					accent-color: $color-spotify;
 					cursor: pointer;
 					margin-right: 20px;
 				}
@@ -198,12 +206,12 @@ body {
 
 			&__button-log-in {
 				transition: 0.3s;
-				background-color: #65d36e;
+				background-color: $color-spotify;
 				border-radius: 50px;
 				border: none;
 				font-size: 14px;
 				padding: 14px 12%;
-				color: black;
+				color: $color-primary;
 				font-weight: bold;
 				margin-top: 55px;
 				margin-bottom: 30px;
@@ -234,13 +242,13 @@ body {
 			border-radius: 50px;
 			padding: 16px;
 			font-size: 14px;
-			background-color: white;
+			background-color: $color-secondary;
 			color: gray;
 			border: 1px solid rgb(167, 165, 165);
 			&:hover {
 				background-color: #4ecf58;
-				color: #000000;
-				border: 1px solid black;
+				color: $color-primary;
+				border: 1px solid $color-primary;
 			}
 			&:active {
 				opacity: 50%;

@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useSpotify } from '../../../customHooks/useSpotify';
-import { useParams } from 'react-router-dom';
+import './CategoryDetails.scss';
 import { PlaylistDetails } from './PlaylistDetails';
 
 interface CategoryIdDetails {
-	[categoryId: string]: string;
+	categoryId: string;
 }
 
 interface Playlist {
 	id: string;
 	name: string;
-    description:string,
-    images:{
-        url:string
-    }[],
+	description: string;
+	images: {
+		url: string;
+	}[];
 }
 
-const CategoryDetails: React.FC = () => {
+const CategoryDetails: React.FC<CategoryIdDetails> = ({ categoryId }) => {
 	const [playlists, setPlaylists] = useState<Playlist[]>([]);
 	const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(null);
 	const { getCategoryPlaylists, isLoading } = useSpotify();
 	const [nextUrl, setNextUrl] = useState(null);
-	const { categoryId } = useParams<CategoryIdDetails>();
 
 	useEffect(() => {
 		if (!isLoading) {
@@ -35,6 +34,7 @@ const CategoryDetails: React.FC = () => {
 			fetchPlaylists();
 		}
 	}, [categoryId, isLoading]);
+
 	const loadMorePlaylists = async () => {
 		if (nextUrl) {
 			const fetchedPlaylists = await getCategoryPlaylists(categoryId, nextUrl);
@@ -46,23 +46,27 @@ const CategoryDetails: React.FC = () => {
 	const handlePlaylistClick = (playlistId: string) => {
 		setSelectedPlaylistId(playlistId);
 	};
-	console.log(playlists);
+
 	return (
-		<div>
-			{!selectedPlaylistId && (
-				<>
-					{playlists.map((playlist, index) => (
-						<div key={`${playlist.id}-${index}`} onClick={() => handlePlaylistClick(playlist.id)}>
-							<img src={playlist.images[0].url} alt={playlist.description} />
-							<h4>{playlist.name}</h4>
-							<p>{playlist.description}</p>
-						</div>
-					))}
-					<button disabled={!loadMorePlaylists} onClick={loadMorePlaylists}>
-						Load more playlists
-					</button>
-				</>
-			)}
+		<div className='categories'>
+			<div className='categories-details'>
+				{playlists.map((playlist, index) => (
+					<div
+						className='categories-details__item'
+						key={`${playlist.id}-${index}`}
+						onClick={() => handlePlaylistClick(playlist.id)}>
+						<img
+							className='categories-details__item__image'
+							src={playlist?.images[0]?.url}
+							alt={playlist.description}
+						/>
+						<div className='categories-details__item__playicon'>▶</div>
+					</div>
+				))}
+			</div>
+			<button className='categories-details__button-load' disabled={!loadMorePlaylists} onClick={loadMorePlaylists}>
+				Load more playlists
+			</button>
 			{selectedPlaylistId && <PlaylistDetails playlistId={selectedPlaylistId} />}
 		</div>
 	);

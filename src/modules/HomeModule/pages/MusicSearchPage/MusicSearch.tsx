@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSpotify } from '../../../customHooks/useSpotify';
 import { useNavigate } from 'react-router-dom';
 import './MusicSearch.scss';
+import CategoryDetails from './CategoryDetails';
 
 type Track = {
 	id: string;
@@ -33,6 +34,8 @@ export const MusicSearch: React.FC = () => {
 	const [categories, setCategories] = useState<Category[]>([]);
 	const [nextCategoriesUrl, setNextCategoriesUrl] = useState<string | null>(null);
 	const { searchTracks, getCategories, isLoading } = useSpotify();
+	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+	const [categoryBackground, setCategoryBackground] = useState<string | null>(null);
 
 	useEffect(() => {
 		if (!isLoading) {
@@ -45,6 +48,10 @@ export const MusicSearch: React.FC = () => {
 			fetchCategories();
 		}
 	}, [isLoading]);
+	const handleCategoryClick = (categoryId: number, backgroundImage: string) => {
+		setSelectedCategory(categoryId.toString());
+		setCategoryBackground(backgroundImage);
+	};
 
 	const loadMoreCategories = async () => {
 		if (nextCategoriesUrl) {
@@ -61,13 +68,21 @@ export const MusicSearch: React.FC = () => {
 			setTracks(results);
 		}
 	};
+	const containerStyle = {
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
+		backgroundImage: categoryBackground ? `url(${categoryBackground})` : '',
+	};
 
 	return (
-		<div className='music-search'>
+		<div style={containerStyle} className='music-search'>
 			Your favorite categories
 			<div className='category-list'>
 				{categories?.map(category => (
-					<div className='category-list__item' key={category.id} onClick={() => navigate(`/categories/${category.id}`)}>
+					<div
+						className='category-list__item'
+						key={category.id}
+						onClick={() => handleCategoryClick(category.id, category.icons[0].url)}>
 						<img className='category-list__item__image' src={category.icons[0].url} alt={`Icon for ${category.name}`} />
 						<h3>{category.name}</h3>
 						<div className='category-list__item__playicon'>▶</div>
@@ -77,9 +92,10 @@ export const MusicSearch: React.FC = () => {
 			<button className='music-search__load-more' disabled={!nextCategoriesUrl} onClick={loadMoreCategories}>
 				Load more category
 			</button>
+			{selectedCategory && <CategoryDetails categoryId={selectedCategory} />}
 			<div>
 				<input type='music-search__text' value={query} onChange={handleSearch} placeholder='Search for music' />
-				{!query && !tracks.length && <div>Ups, we dont have this track</div>}
+				{!!query && !tracks.length && <div>Ups, we dont have this track</div>}
 				<div className='track-list'>
 					{tracks.map(track => (
 						<div key={track.id} className='track-list__item'>

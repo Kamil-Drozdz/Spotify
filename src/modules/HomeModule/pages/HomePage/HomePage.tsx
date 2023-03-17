@@ -23,26 +23,26 @@ export const HomePage: React.FC = () => {
 
 	return (
 		<div className='home-page'>
-			<div className='home-page__login-section'>
-				<h1 className='home-page__login-section__title'>Spotify</h1>
-				<p className='home-page__login-section__text-message'>Please sign in to Spotify to continue.</p>
-				<div className='home-page__login-section__buttons'>
-					<a className='home-page__login-section__buttons__button home-page__login-section__buttons__button--facebook'>
+			<div className='login-section'>
+				<h1 className='login-section__title'>Spotify</h1>
+				<p className='login-section__text-message'>Please sign in to Spotify to continue.</p>
+				<div className='login-section__buttons'>
+					<a className='login-section__buttons__button login-section__buttons__button--facebook'>
 						<img src={logoFacebook} />
 						Sign in with Facebook
 					</a>
-					<a className='home-page__login-section__buttons__button home-page__login-section__buttons__button--apple'>
+					<a className='login-section__buttons__button login-section__buttons__button--apple'>
 						<img src={logoApple} />
 						Sign in with Apple
 					</a>
-					<a className='home-page__login-section__buttons__button home-page__login-section__buttons__button--google'>
+					<a className='login-section__buttons__button login-section__buttons__button--google'>
 						<img src={logoGoogle} />
 						Sign in with Google
 					</a>
 				</div>
-				<p className='home-page__login-section__separator'>or</p>
-				<form className='home-page__login-section__form-log-in' onSubmit={handleLogin}>
-					<label className='home-page__login-section__input-text'>
+				<p className='login-section__separator'>or</p>
+				<form className='login-section__form-log-in' onSubmit={handleLogin}>
+					<label className='login-section__input-text'>
 						Email address or username
 						<input
 							placeholder='Email address or username'
@@ -50,7 +50,7 @@ export const HomePage: React.FC = () => {
 							onChange={event => setEmail(event.target.value)}
 						/>
 					</label>
-					<label className='home-page__login-section__input-text-password'>
+					<label className='login-section__input-text-password'>
 						Password
 						<input
 							placeholder='Password'
@@ -59,28 +59,28 @@ export const HomePage: React.FC = () => {
 							onChange={event => setPassword(event.target.value)}
 						/>
 					</label>
-					<a href='#' className='home-page__login-section__reset-password-link'>
+					<a href='#' className='login-section__reset-password-link'>
 						Do not you remember the password?
 					</a>
-					{error && <p className='home-page__login-section__error'>{error}</p>}
-					<div className='home-page__login-section__login'>
-						<label className='home-page__login-section__login__remember-me'>
+					{error && <p className='login-section__error'>{error}</p>}
+					<div className='login-section__login'>
+						<label className='login-section__login__remember-me'>
 							<input
 								onClick={() => setRememberMe(!rememberMe)}
-								className='home-page__login-section__login__remember-me__checkbox'
+								className='login-section__login__remember-me__checkbox'
 								type='checkbox'
 							/>
 							<p>Remember me</p>
 						</label>
-						<button className='home-page__login-section__login__button-log-in'>Sign up</button>
+						<button className='login-section__login__button-log-in'>Sign up</button>
 					</div>
 				</form>
 				<div>
-					<a href='#' className='home-page__login-section__text'>
+					<a href='#' className='login-section__text'>
 						You dont have account yet?
 					</a>
 					<Link to='/register'>
-						<button className='home-page__login-section__button-register'>Sign up for spotify</button>
+						<button className='login-section__button-register'>Sign up for spotify</button>
 					</Link>
 				</div>
 			</div>
