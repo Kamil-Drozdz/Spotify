@@ -1,11 +1,13 @@
 .container {
 	color: black;
 
-	.welcome {
+	&__welcome {
 		font-size: 32px;
 		font-weight: bold;
 	}
-	.logout-button {
+	&__button--logout,
+	&__button--preview {
+		margin-top: 8px;
 		background-color: #65d36e;
 		border-radius: 50px;
 		border: none;

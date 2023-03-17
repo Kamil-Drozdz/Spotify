@@ -11,7 +11,7 @@ interface User {
 	};
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+const PrivateRoute: React.FC<PrivateRouteProps> = () => {
 	const user = useContext<User>(AuthContext);
 
 	if (user?.user?.email) {

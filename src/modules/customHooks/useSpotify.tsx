@@ -35,8 +35,8 @@ export const useSpotify = () => {
 	};
 
 	const getCategories = async (url?: string) => {
-		const apiUrl = url || 'https://api.spotify.com/v1/browse/categories';
-		const response = await fetch(apiUrl, {
+		const endpointCategories = url || 'https://api.spotify.com/v1/browse/categories';
+		const response = await fetch(endpointCategories, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 			},
@@ -45,9 +45,10 @@ export const useSpotify = () => {
 		return data?.categories;
 	};
 
-	const getCategoryPlaylists = async (categoryId: string) => {
+	const getCategoryPlaylists = async (categoryId: string, url?: string) => {
+		const endpointCategoriesPlaylists = url || `https://api.spotify.com/v1/browse/categories/${categoryId}/playlists`;
 		try {
-			const response = await fetch(`https://api.spotify.com/v1/browse/categories/${categoryId}/playlists`, {
+			const response = await fetch(endpointCategoriesPlaylists, {
 				headers: {
 					Authorization: `Bearer ${accessToken}`,
 				},
@@ -56,18 +57,17 @@ export const useSpotify = () => {
 			if (!response.ok) {
 				throw new Error(`Error fetching category playlists: ${response.statusText}`);
 			}
-
 			const data = await response.json();
-			console.log(data);
-			return data?.playlists?.items;
+			return data?.playlists;
 		} catch (error) {
 			console.error('Error fetching category playlists:', error);
 			return;
 		}
 	};
 	const getPlaylistTracks = async (playlistId: string) => {
+		const endpointPlaylist = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
 		try {
-			const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+			const response = await fetch(endpointPlaylist, {
 				headers: {
 					Authorization: `Bearer ${accessToken}`,
 				},

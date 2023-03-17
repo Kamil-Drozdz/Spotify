@@ -31,7 +31,6 @@ export const MusicSearch: React.FC = () => {
 	const [query, setQuery] = useState<string>('');
 	const [tracks, setTracks] = useState<Track[]>([]);
 	const [categories, setCategories] = useState<Category[]>([]);
-
 	const [nextCategoriesUrl, setNextCategoriesUrl] = useState<string | null>(null);
 	const { searchTracks, getCategories, isLoading } = useSpotify();
 
@@ -51,7 +50,7 @@ export const MusicSearch: React.FC = () => {
 		if (nextCategoriesUrl) {
 			const fetchedData = await getCategories(nextCategoriesUrl);
 			setCategories(prevCategories => [...prevCategories, ...fetchedData.items]);
-			setNextCategoriesUrl(fetchedData.next);
+			setNextCategoriesUrl(fetchedData?.next);
 		}
 	};
 
@@ -64,43 +63,49 @@ export const MusicSearch: React.FC = () => {
 	};
 
 	return (
-		<>
-			{categories?.map(category => (
-				<div key={category.id} onClick={() => navigate(`/categories/${category.id}`)}>
-					<h3>{category.name}</h3>
-					<img src={category.icons[0].url} alt={`Icon for ${category.name}`} />
-				</div>
-			))}
-			<button disabled={!nextCategoriesUrl} onClick={loadMoreCategories}>
-				Load more category
-			</button>
-			<div>
-				<input type='text' value={query} onChange={handleSearch} placeholder='Search for music' />
-				{tracks.length === 0 && <div>Ups, we dont have this track</div>}
-				{tracks.map(track => (
-					<div key={track.id}>
-						<h3>Track name: {track.name}</h3>
-						<p>
-							Artist:{' '}
-							{track.artists.map((artist, index) => (
-								<span key={index}>{(index ? ', ' : '') + artist.name}</span>
-							))}
-						</p>
-						<p>Album: {track.album.name}</p>
-						{track.album.images[0] && (
-							<img
-								className='categories-image'
-								src={track.album.images[0].url}
-								alt={`Album cover for ${track.album.name}`}
-							/>
-						)}
-						Try this track!
-						<audio src={track.preview_url} controls />
-						<p>Popularity: {track.popularity}</p>
-						<a href={track.external_urls.spotify}>Full track here</a>
+		<div className='music-search'>
+			Your favorite categories
+			<div className='category-list'>
+				{categories?.map(category => (
+					<div className='category-list__item' key={category.id} onClick={() => navigate(`/categories/${category.id}`)}>
+						<img className='category-list__item__image' src={category.icons[0].url} alt={`Icon for ${category.name}`} />
+						<h3>{category.name}</h3>
+						<div className='category-list__item__playicon'>▶</div>
 					</div>
 				))}
 			</div>
-		</>
+			<button className='music-search__load-more' disabled={!nextCategoriesUrl} onClick={loadMoreCategories}>
+				Load more category
+			</button>
+			<div>
+				<input type='music-search__text' value={query} onChange={handleSearch} placeholder='Search for music' />
+				{!query && !tracks.length && <div>Ups, we dont have this track</div>}
+				<div className='track-list'>
+					{tracks.map(track => (
+						<div key={track.id} className='track-list__item'>
+							<h3>Track name: {track.name}</h3>
+							<p>
+								Artist:
+								{track.artists.map((artist, index) => (
+									<span key={index}>{(index ? ', ' : '') + artist.name}</span>
+								))}
+							</p>
+							<p>Album: {track.album.name}</p>
+							{track.album.images[0] && (
+								<img
+									className='track-list__image'
+									src={track.album.images[0].url}
+									alt={`Album cover for ${track.album.name}`}
+								/>
+							)}
+							Try this track!
+							<audio src={track.preview_url} controls />
+							<p>Popularity: {track.popularity}</p>
+							<a href={track.external_urls.spotify}>Full track here</a>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
 	);
 };

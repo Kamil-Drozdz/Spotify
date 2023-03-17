@@ -31,7 +31,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		event.preventDefault();
 		await signInWithEmailAndPassword(auth, email, password)
 			.then(userCredential => {
-				const user = userCredential.user;
+				userCredential.user;
 				navigate('/welcome');
 			})
 			.catch(error => {
@@ -53,10 +53,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			});
 			if (response.ok) {
 				const data = await response.json();
+				const expirationDate = new Date().getTime() + data.expires_in * 1000;
+				Cookies.set('accessToken', data?.access_token);
+				Cookies.set('expirationDate', expirationDate.toString());
 				setAccessToken(data?.access_token);
-				console.log(data.expires_in);
-				Cookies.set('accessToken', data?.access_token, { expires: data?.expires_in / 3600 });
-			} else {
 				throw new Error(`Error getting Spotify access token: ${response.statusText}`);
 			}
 		} catch (error) {
@@ -65,12 +65,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		}
 	};
 
+	const storedAccessToken = Cookies.get('accessToken');
+	const expirationDate = Cookies.get('expirationDate');
+
+	const isAccessTokenValid = () => {
+		if (!storedAccessToken || !expirationDate) {
+			return false;
+		}
+
+		const currentTime = new Date().getTime();
+		return currentTime < Number(expirationDate);
+	};
+
 	useEffect(() => {
 		if (user) {
-			const storedAccessToken = Cookies.get('accessToken');
-
-			if (storedAccessToken) {
-				setAccessToken(storedAccessToken);
+			if (isAccessTokenValid()) {
+				if (storedAccessToken) {
+					setAccessToken(storedAccessToken);
+				}
 			} else {
 				getSpotifyAccessToken();
 			}
