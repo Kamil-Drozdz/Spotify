@@ -1,24 +1,127 @@
+$color-primary: black;
+$color-spotify: #65d36e;
+
 .playlist {
-	width: 90%;
 	display: flex;
-	margin: 0 5%;
+	margin: 0px 5% 40px 5%;
 	flex-direction: column;
 	align-items: start;
 
-	.playlist-title {
+	&-title {
 		background-color: white;
 		padding: 4px;
 		border-radius: 8px;
 	}
+
 	.playlist-details {
+		border-radius: 8px;
+		font-size: 14px;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
 		background-color: black;
+		justify-content: center;
 		color: white;
-		&__item {
-			width: 100%;
+
+		&__header {
+			justify-content: space-between;
+			padding: 10px 0px;
 			display: flex;
+			border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+			width: auto;
+			div {
+				margin-left: 10px;
+			}
+			:last-child {
+				margin-right: 20px;
+			}
+		}
+
+		&-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+			padding: 2px 0;
+			&:hover {
+				background-color: rgb(46, 44, 44);
+			}
+			:first-child {
+				margin-left: 10px;
+			}
+			&__duration {
+				width: 40px;
+				margin-right: 10px;
+			}
+			&__describe {
+				display: flex;
+				height: 40px;
+				width: 300px;
+			}
+			&__name {
+				margin-left: 20px;
+				font-size: 12px;
+			}
+			&__date-added {
+				width: 150px;
+			}
+			&__play-button {
+				font-size: 16px;
+				border-radius: 50%;
+				cursor: pointer;
+				box-sizing: content-box;
+				padding: 8px;
+				background-color: #65d36e;
+				width: 20px;
+			}
+			&__avability {
+				width: 100px;
+				color: $color-spotify;
+			}
+			&__not-avability {
+				width: 100px;
+				color: red;
+			}
+			&__link {
+				color: $color-spotify;
+				text-decoration: none;
+				width: 200px;
+				&:hover {
+					color: #d5e2d0;
+				}
+			}
+			p {
+				width: 10px;
+			}
+		}
+
+		&__audio-player {
+			border-top: 1px solid hsla(0, 0%, 100%, 0.6);
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 60px;
+			background-color: $color-primary;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		&__now-playing {
+			margin-left: 20px;
+			width: 250px;
+			text-align: left;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		audio {
+			display: none;
+		}
+		FiVolume2 {
+			margin-left: 10px;
+			font-size: 20px;
 		}
 	}
 }

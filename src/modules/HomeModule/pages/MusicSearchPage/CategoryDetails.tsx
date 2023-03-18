@@ -53,18 +53,18 @@ const CategoryDetails: React.FC<CategoryIdDetails> = ({ categoryId }) => {
 				{playlists.map((playlist, index) => (
 					<div
 						className='categories-details__item'
-						key={`${playlist.id}-${index}`}
-						onClick={() => handlePlaylistClick(playlist.id)}>
+						key={`${playlist?.id}-${index}`}
+						onClick={() => handlePlaylistClick(playlist?.id)}>
 						<img
 							className='categories-details__item__image'
 							src={playlist?.images[0]?.url}
-							alt={playlist.description}
+							alt={playlist?.description}
 						/>
 						<div className='categories-details__item__playicon'>▶</div>
 					</div>
 				))}
 			</div>
-			<button className='categories-details__button-load' disabled={!loadMorePlaylists} onClick={loadMorePlaylists}>
+			<button className='categories-details__button-load' disabled={!nextUrl} onClick={loadMorePlaylists}>
 				Load more playlists
 			</button>
 			{selectedPlaylistId && <PlaylistDetails playlistId={selectedPlaylistId} />}

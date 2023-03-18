@@ -9,6 +9,13 @@ $color-spotify: #65d36e;
 	color: $color-primary;
 	background-color: #747272;
 	scroll-behavior: smooth;
+	&-title {
+		margin: 10px 5%;
+		width: fit-content;
+		background-color: white;
+		padding: 4px;
+		border-radius: 8px;
+	}
 	::-webkit-scrollbar {
 		width: 10px;
 	}
@@ -30,7 +37,6 @@ $color-spotify: #65d36e;
 		border-radius: 8px;
 		background-color: #181818;
 		overflow-x: scroll;
-		width: 90%;
 		height: 250px;
 		margin: 0 5%;
 		display: flex;
@@ -86,9 +92,12 @@ $color-spotify: #65d36e;
 		transition: 0.3s;
 		width: 15%;
 		min-width: 300px;
+		height: 47px;
 		justify-content: center;
 		color: $color-primary;
+		box-sizing: border-box;
 		display: flex;
+		border: none;
 		margin: 0 10%;
 		background-color: $color-spotify;
 		border-radius: 50px;
@@ -98,6 +107,7 @@ $color-spotify: #65d36e;
 		margin-bottom: 30px;
 		cursor: pointer;
 		&:hover {
+			border: 1px solid white;
 			background-color: #4ecf58;
 		}
 		&:active {

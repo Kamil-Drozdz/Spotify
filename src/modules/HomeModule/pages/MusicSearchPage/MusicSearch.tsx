@@ -76,7 +76,7 @@ export const MusicSearch: React.FC = () => {
 
 	return (
 		<div style={containerStyle} className='music-search'>
-			Your favorite categories
+			<h2 className='music-search-title'>Your favorite categories</h2>
 			<div className='category-list'>
 				{categories?.map(category => (
 					<div
