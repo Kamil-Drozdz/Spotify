@@ -47,11 +47,7 @@ interface currentTrack {
 		}[];
 	};
 }
-interface Tracks {
-	[index: number]: Track;
-	track: { preview_url: string };
-	length: number;
-}
+type Tracks = Track[];
 
 export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 	const { getPlaylistTracks, isLoading } = useSpotify();
@@ -74,7 +70,7 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 			audioElement.volume = normalizedValue;
 		}
 	};
-	
+
 	const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const progress = parseFloat(e.target.value);
 		setProgress(progress);
@@ -138,8 +134,8 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 		}
 	}, [audioElement]);
 	const msToTime = (duration: number) => {
-		let seconds = Math.floor((duration / 1000) % 60);
-		let minutes = Math.floor((duration / (1000 * 60)) % 60);
+		let seconds: string | number = Math.floor((duration / 1000) % 60);
+		let minutes: string | number = Math.floor((duration / (1000 * 60)) % 60);
 
 		minutes = minutes < 10 ? '0' + minutes : minutes;
 		seconds = seconds < 10 ? '0' + seconds : seconds;
