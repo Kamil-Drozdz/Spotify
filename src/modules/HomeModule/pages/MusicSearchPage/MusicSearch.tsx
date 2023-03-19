@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useSpotify } from '../../../customHooks/useSpotify';
 import { useNavigate } from 'react-router-dom';
 import './MusicSearch.scss';
+import { AuthContext } from '@/modules/Auth';
 import CategoryDetails from './CategoryDetails';
+import { AiOutlineUser } from 'react-icons/ai';
+import { auth } from '@/modules/firebase';
 
 type Track = {
 	id: string;
@@ -26,6 +29,11 @@ type Category = {
 	}[];
 	href: string;
 };
+type Auth = {
+	user?: {
+		displayName: string;
+	};
+};
 
 export const MusicSearch: React.FC = () => {
 	const navigate = useNavigate();
@@ -36,6 +44,17 @@ export const MusicSearch: React.FC = () => {
 	const { searchTracks, getCategories, isLoading } = useSpotify();
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 	const [categoryBackground, setCategoryBackground] = useState<string | null>(null);
+	const { user } = useContext<Auth>(AuthContext);
+	const [dropdownOpen, setDropdownOpen] = useState(false);
+
+	const handleLogout = async () => {
+		try {
+			await auth.signOut();
+			navigate('/');
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	useEffect(() => {
 		if (!isLoading) {
@@ -76,7 +95,23 @@ export const MusicSearch: React.FC = () => {
 
 	return (
 		<div style={containerStyle} className='music-search'>
-			<h2 className='music-search-title'>Your favorite categories</h2>
+			<div className='music-search-header'>
+				<h2 className='music-search-header__title'>Your favorite categories</h2>
+				<div
+					className='music-search-header__user'
+					onClick={() => {
+						setDropdownOpen(!dropdownOpen);
+					}}>
+					<AiOutlineUser title={user?.displayName} className='music-search-header__user-icon' />
+					{user?.displayName}
+					{dropdownOpen && (
+						<div className='music-search-header__dropdown'>
+							<button>Settings</button>
+							<button onClick={handleLogout}>Logout</button>
+						</div>
+					)}
+				</div>
+			</div>
 			<div className='category-list'>
 				{categories?.map(category => (
 					<div

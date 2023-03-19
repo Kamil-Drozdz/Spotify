@@ -46,11 +46,10 @@ const CategoryDetails: React.FC<CategoryIdDetails> = ({ categoryId }) => {
 	const handlePlaylistClick = (playlistId: string) => {
 		setSelectedPlaylistId(playlistId);
 	};
-
-	return (
+	return playlists?.length ? (
 		<div className='categories'>
 			<div className='categories-details'>
-				{playlists.map((playlist, index) => (
+				{playlists?.map((playlist, index) => (
 					<div
 						className='categories-details__item'
 						key={`${playlist?.id}-${index}`}
@@ -69,6 +68,8 @@ const CategoryDetails: React.FC<CategoryIdDetails> = ({ categoryId }) => {
 			</button>
 			{selectedPlaylistId && <PlaylistDetails playlistId={selectedPlaylistId} />}
 		</div>
+	) : (
+		<div>Ups we dont have this playlists now</div>
 	);
 };
 

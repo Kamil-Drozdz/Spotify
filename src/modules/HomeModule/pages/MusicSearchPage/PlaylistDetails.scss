@@ -3,7 +3,7 @@ $color-spotify: #65d36e;
 
 .playlist {
 	display: flex;
-	margin: 0px 5% 40px 5%;
+	margin: 0px 5% 60px 5%;
 	flex-direction: column;
 	align-items: start;
 
@@ -29,6 +29,12 @@ $color-spotify: #65d36e;
 			display: flex;
 			border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
 			width: auto;
+			:nth-child(2) {
+				width: 160px;
+			}
+			:nth-child(4) {
+				margin-right: 25px;
+			}
 			div {
 				margin-left: 10px;
 			}
@@ -38,17 +44,35 @@ $color-spotify: #65d36e;
 		}
 
 		&-item {
+			box-sizing: border-box;
+			height: 50px;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
 			padding: 2px 0;
+			&--active {
+				border-bottom: 1px solid white;
+			}
 			&:hover {
 				background-color: rgb(46, 44, 44);
+				.playlist-details-item__number {
+					background-color: $color-spotify;
+					border-radius: 50%;
+					height: 20px;
+					inline-size: 20px;
+					text-align: center;
+					font-size: 18px;
+					color: black;
+				}
 			}
-			:first-child {
+			&__number {
+				min-width: 20px;
+				padding: 8px;
+				cursor: pointer;
 				margin-left: 10px;
 			}
+
 			&__duration {
 				width: 40px;
 				margin-right: 10px;
@@ -59,21 +83,25 @@ $color-spotify: #65d36e;
 				width: 300px;
 			}
 			&__name {
+				display: flex;
+				flex-direction: column;
+				align-items: start;
+				justify-content: center;
 				margin-left: 20px;
 				font-size: 12px;
+				width: 250px;
+				a {
+					color: white;
+					text-decoration: none;
+					&:hover {
+						text-decoration: underline;
+					}
+				}
 			}
 			&__date-added {
 				width: 150px;
 			}
-			&__play-button {
-				font-size: 16px;
-				border-radius: 50%;
-				cursor: pointer;
-				box-sizing: content-box;
-				padding: 8px;
-				background-color: #65d36e;
-				width: 20px;
-			}
+
 			&__avability {
 				width: 100px;
 				color: $color-spotify;
@@ -85,9 +113,11 @@ $color-spotify: #65d36e;
 			&__link {
 				color: $color-spotify;
 				text-decoration: none;
-				width: 200px;
+				margin-right: 180px;
+				margin-left: 20px;
 				&:hover {
 					color: #d5e2d0;
+					text-decoration: underline;
 				}
 			}
 			p {
@@ -96,32 +126,191 @@ $color-spotify: #65d36e;
 		}
 
 		&__audio-player {
+			user-select: none;
 			border-top: 1px solid hsla(0, 0%, 100%, 0.6);
 			position: fixed;
 			bottom: 0;
 			left: 0;
 			right: 0;
-			height: 60px;
+			height: 80px;
 			background-color: $color-primary;
 			display: flex;
-			justify-content: space-between;
+			justify-content: space-evenly;
+			align-items: center;
+			z-index: 10;
+		}
+
+		audio {
+			display: none;
+		}
+	}
+	.audio-player-item {
+		&__artist {
+			display: flex;
 			align-items: center;
 		}
+		&__console {
+			width: 220px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		&__play-button {
+			all: unset;
+			cursor: pointer;
+			background-color: $color-spotify;
+
+			margin: 0 5%;
+			border-radius: 50%;
+			box-sizing: border-box;
+			height: 50px;
+			text-align: center;
+			inline-size: 50px;
+			color: $color-primary;
+			&--prev,
+			&--next {
+				height: 30px;
+				width: 50px;
+				border-radius: 4px;
+				font-weight: bold;
+			}
+		}
+		&__image {
+			object-fit: cover;
+			margin-right: 30px;
+		}
+		&__volume {
+			display: flex;
+			flex-wrap: nowrap;
+			cursor: pointer;
+			align-items: center;
+			input[type='range'] {
+				appearance: none;
+				width: 100%;
+				height: 2px;
+				margin-left: 10px;
+				background: #d3d3d3;
+				accent-color: $color-spotify;
+				cursor: pointer;
+			}
+		}
+
+		&__progress {
+			cursor: pointer;
+			input[type='range'] {
+				appearance: none;
+				width: 100%;
+				height: 2px;
+				accent-color: $color-spotify;
+				background: #d3d3d3;
+
+				cursor: pointer;
+			}
+		}
 		&__now-playing {
-			margin-left: 20px;
 			width: 250px;
 			text-align: left;
 			overflow: hidden;
 			white-space: nowrap;
 			text-overflow: ellipsis;
 		}
+	}
+}
 
-		audio {
-			display: none;
+@media only screen and (max-width: 1023px) {
+	.playlist {
+		.playlist-details {
+			&__header {
+				display: none;
+			}
+			&-item {
+				&__date-added {
+					display: none;
+				}
+				&__name {
+					margin: 2px 15px;
+					overflow: hidden;
+					font-size: 10px;
+					max-width: 150px;
+				}
+				&__link {
+					width: auto;
+					margin-right: 30px;
+				}
+			}
+			&__audio-player {
+				display: flex;
+				justify-content: space-around;
+			}
+
+			.audio-player-item {
+				&__console {
+					flex-direction: row-reverse;
+					align-items: center;
+					width: auto;
+				}
+				&__now-playing {
+					height: auto;
+					width: 200px;
+				}
+				&__play-button {
+					margin-left: 50px;
+					margin-right: 10px;
+					&--prev,
+					&--next {
+						display: none;
+					}
+				}
+
+				&__volume {
+					display: none;
+				}
+			}
 		}
-		FiVolume2 {
-			margin-left: 10px;
-			font-size: 20px;
+	}
+}
+@media only screen and (max-width: 500px) {
+	.playlist {
+		&-title {
+			font-size: smaller;
+		}
+		.playlist-details {
+			&-item {
+				&:hover {
+					.playlist-details-item__number {
+						margin: 0 5px;
+					}
+				}
+				&__link {
+					margin: 0 10px;
+					font-size: 10px;
+				}
+				&__duration {
+					display: none;
+				}
+				&__avability {
+					font-size: 10px;
+				}
+				&__not-avability {
+					font-size: 10px;
+				}
+			}
+			.audio-player-item {
+				&__now-playing {
+					font-size: 10px;
+					width: auto;
+				}
+				&__progress {
+					width: auto;
+				}
+				&__image {
+					margin-left: 10px;
+					margin-right: 10px;
+				}
+				&__play-button {
+					margin-left: 20px;
+				}
+			}
 		}
 	}
 }

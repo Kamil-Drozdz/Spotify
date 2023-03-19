@@ -7,14 +7,61 @@ $color-spotify: #65d36e;
 	min-height: 99vh;
 	font-size: 24px;
 	color: $color-primary;
+	justify-content: center;
 	background-color: #747272;
 	scroll-behavior: smooth;
-	&-title {
-		margin: 10px 5%;
-		width: fit-content;
-		background-color: white;
-		padding: 4px;
-		border-radius: 8px;
+	&-header {
+		width: 90%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		&__dropdown {
+			position: absolute;
+			background-color: #353333;
+			border-radius: 5px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			height: 100px;
+			top: 70px;
+			z-index: 1;
+			width: 150px;
+			display: flex;
+			flex-direction: column;
+			align-items: start;
+			justify-content: start;
+			button {
+				all: unset;
+				font-size: 12px;
+				padding: 8px;
+				width: 100%;
+				box-sizing: border-box;
+				border-bottom: 1px solid hsla(0, 0%, 100%, 0.6);
+				&:hover {
+					background-color: #9e9696;
+				}
+			}
+		}
+		&__title {
+			margin: 10px 5%;
+			width: fit-content;
+			background-color: white;
+			padding: 4px;
+			border-radius: 8px;
+		}
+
+		&__user {
+			color: white;
+			padding: 10px;
+			border-radius: 25px;
+			display: flex;
+			align-items: center;
+			background-color: black;
+			&-icon {
+				background-color: gray;
+				color: white;
+				margin-right: 5px;
+				border-radius: 50%;
+			}
+		}
 	}
 	::-webkit-scrollbar {
 		width: 10px;
@@ -60,15 +107,20 @@ $color-spotify: #65d36e;
 			background-color: #181818;
 			border-radius: 8px;
 			&__playicon {
+				box-shadow: 0px 13px 35px 6px rgba(0, 0, 0, 0.75);
 				background-color: $color-spotify;
 				position: absolute;
+				box-sizing: border-box;
+				text-align: center;
 				display: none;
-				bottom: 25%;
+				bottom: 0%;
+				inline-size: 43px;
 				right: 15%;
 				color: $color-primary;
 				font-size: 20px;
-				border-radius: 50%;
+				border-radius: 500px;
 				cursor: pointer;
+				transition: 0.3s;
 				padding: 10px;
 			}
 			h3 {
@@ -83,7 +135,11 @@ $color-spotify: #65d36e;
 			}
 			&:hover {
 				.category-list__item__playicon {
+					bottom: 25%;
 					display: block;
+					&:hover {
+						transform: scale(1.2);
+					}
 				}
 			}
 		}
