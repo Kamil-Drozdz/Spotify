@@ -63,11 +63,38 @@
 					color: black;
 				}
 			}
+			&__default {
+				min-width: 20px;
+				margin-left: 10px;
+				padding: 8px;
+			}
+
 			&__number {
 				min-width: 20px;
 				padding: 8px;
 				cursor: pointer;
 				margin-left: 10px;
+				&--bar {
+					left: -20px;
+					position: relative;
+					display: flex;
+					justify-content: space-around;
+					width: 13px;
+					height: 13px;
+					span {
+						width: 5px;
+						background-color: var(--color-spotify);
+						transform-origin: bottom;
+						animation: bounce 2.2s ease infinite alternate;
+						content: '';
+						&:nth-of-type(2) {
+							animation-delay: -2.2s;
+						}
+						&:nth-of-type(3) {
+							animation-delay: -3.7s;
+						}
+					}
+				}
 			}
 
 			&__duration {
@@ -319,5 +346,27 @@
 	}
 	.playlist .playlist-details .audio-player-item__progress {
 		width: 75px;
+	}
+}
+
+@keyframes bounce {
+	10% {
+		transform: scaleY(0.3);
+	}
+
+	30% {
+		transform: scaleY(1);
+	}
+
+	60% {
+		transform: scaleY(0.5);
+	}
+
+	80% {
+		transform: scaleY(0.75);
+	}
+
+	100% {
+		transform: scaleY(0.6);
 	}
 }

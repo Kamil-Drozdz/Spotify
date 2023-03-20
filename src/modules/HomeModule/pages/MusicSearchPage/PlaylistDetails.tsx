@@ -186,19 +186,29 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 						onMouseLeave={() => setHoveredTrack(null)}
 						key={track.track.id}
 						onClick={() => setCurrentTrack(track?.track)}>
-						<p className='playlist-details-item__number'>
-							{index + 1 === hoveredTrack && track.track.id === currentTrack?.id ? (
-								isPlaying ? (
-									<BiPause onClick={() => setIsPlaying(false)} />
-								) : (
+						{track?.track?.preview_url ? (
+							<p className='playlist-details-item__number'>
+								{index + 1 === hoveredTrack && track.track.id === currentTrack?.id ? (
+									isPlaying ? (
+										<BiPause onClick={() => setIsPlaying(false)} />
+									) : (
+										<BsFillPlayFill onClick={() => setIsPlaying(true)} />
+									)
+								) : index + 1 === hoveredTrack ? (
 									<BsFillPlayFill onClick={() => setIsPlaying(true)} />
-								)
-							) : index + 1 === hoveredTrack ? (
-								<BsFillPlayFill onClick={() => setIsPlaying(true)} />
-							) : (
-								index + 1
-							)}
-						</p>
+								) : isPlaying && track.track.id === currentTrack?.id ? (
+									<div className='playlist-details-item__number playlist-details-item__number--bar'>
+										<span />
+										<span />
+										<span />
+									</div>
+								) : (
+									index + 1
+								)}
+							</p>
+						) : (
+							<p className=' playlist-details-item__default'> {index + 1}</p>
+						)}
 						<div className='playlist-details-item__describe'>
 							<img
 								className='playlist-details-item__image'
