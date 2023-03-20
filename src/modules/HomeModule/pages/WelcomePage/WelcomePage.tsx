@@ -15,16 +15,16 @@ const WelcomePage: React.FC = () => {
 	};
 
 	return (
-		<div className='container'>
-			<p className='container__welcome'>
+		<div className='welcome-page'>
+			<p className='welcome-page__name'>
 				Welcome {auth?.currentUser?.displayName ? auth.currentUser.displayName : auth?.currentUser?.email}!
 			</p>
-			<p className='container__welcome'>Email: {auth?.currentUser?.email}</p>
-			<button className='container__button--logout' onClick={handleLogout}>
+			<p className='welcome-page__email'>Email: {auth?.currentUser?.email}</p>
+			<button className='welcome-page__button--logout' onClick={handleLogout}>
 				Logout
 			</button>
 			<button
-				className='container__button--preview'
+				className='welcome-page__button--preview'
 				onClick={() => {
 					navigate('/music-search');
 				}}>

@@ -215,6 +215,7 @@ body {
 				font-size: 14px;
 				padding: 14px 12%;
 				color: $color-primary;
+				white-space: nowrap;
 				font-weight: bold;
 				margin-top: 55px;
 				margin-bottom: 30px;
@@ -265,7 +266,18 @@ body {
 		justify-content: flex-start;
 		padding-bottom: 20%;
 
-		&__login-section {
+		.login-section {
+			width: 40%;
+			max-width: 600px;
+		}
+	}
+}
+@media only screen and (max-width: 768px) {
+	.home-page {
+		justify-content: flex-start;
+		padding-bottom: 20%;
+
+		.login-section {
 			width: 80%;
 			max-width: 600px;
 		}

@@ -1,12 +1,9 @@
-$color-primary: black;
-$color-spotify: #65d36e;
-
 .music-search {
 	padding-top: 10px;
 	height: 100%;
 	min-height: 99vh;
 	font-size: 24px;
-	color: $color-primary;
+	color: var(--color-primary);
 	justify-content: center;
 	background-color: #747272;
 	scroll-behavior: smooth;
@@ -43,21 +40,21 @@ $color-spotify: #65d36e;
 		&__title {
 			margin: 10px 5%;
 			width: fit-content;
-			background-color: white;
+			background-color: var(--color-secondary);
 			padding: 4px;
 			border-radius: 8px;
 		}
 
 		&__user {
-			color: white;
+			color: var(--color-secondary);
 			padding: 10px;
 			border-radius: 25px;
 			display: flex;
 			align-items: center;
-			background-color: black;
+			background-color: var(--color-primary);
 			&-icon {
 				background-color: gray;
-				color: white;
+				color: var(--color-secondary);
 				margin-right: 5px;
 				border-radius: 50%;
 			}
@@ -72,7 +69,7 @@ $color-spotify: #65d36e;
 	}
 
 	::-webkit-scrollbar-thumb {
-		background: $color-spotify;
+		background: var(--color-spotify);
 		border-radius: 8px;
 	}
 
@@ -96,7 +93,7 @@ $color-spotify: #65d36e;
 			width: 220px;
 			height: 200px;
 			font-size: 12px;
-			color: white;
+			color: var(--color-secondary);
 			display: flex;
 			position: relative;
 			align-items: center;
@@ -108,20 +105,20 @@ $color-spotify: #65d36e;
 			border-radius: 8px;
 			&__playicon {
 				box-shadow: 0px 13px 35px 6px rgba(0, 0, 0, 0.75);
-				background-color: $color-spotify;
+				background-color: var(--color-spotify);
 				position: absolute;
 				box-sizing: border-box;
 				text-align: center;
-				display: none;
+				opacity: 0;
 				bottom: 0%;
-				inline-size: 43px;
+				height: 44px;
 				right: 15%;
-				color: $color-primary;
-				font-size: 20px;
+				color: var(--color-primary);
 				border-radius: 500px;
+				inline-size: 44px;
 				cursor: pointer;
 				transition: 0.3s;
-				padding: 10px;
+				padding: 5px;
 			}
 			h3 {
 				width: 100px;
@@ -136,7 +133,8 @@ $color-spotify: #65d36e;
 			&:hover {
 				.category-list__item__playicon {
 					bottom: 25%;
-					display: block;
+					opacity: 1;
+
 					&:hover {
 						transform: scale(1.2);
 					}
@@ -150,12 +148,12 @@ $color-spotify: #65d36e;
 		min-width: 300px;
 		height: 47px;
 		justify-content: center;
-		color: $color-primary;
+		color: var(--color-primary);
 		box-sizing: border-box;
 		display: flex;
 		border: none;
 		margin: 0 10%;
-		background-color: $color-spotify;
+		background-color: var(--color-spotify);
 		border-radius: 50px;
 		border: none;
 		padding: 16px 2px;
@@ -163,7 +161,7 @@ $color-spotify: #65d36e;
 		margin-bottom: 30px;
 		cursor: pointer;
 		&:hover {
-			border: 1px solid white;
+			border: 1px solid var(--color-secondary);
 			background-color: #4ecf58;
 		}
 		&:active {
@@ -171,6 +169,28 @@ $color-spotify: #65d36e;
 		}
 		&:disabled {
 			opacity: 30%;
+		}
+	}
+}
+@media only screen and (max-width: 750px) {
+	.music-search {
+		&-header {
+			font-size: 14px;
+			&__dropdown {
+				box-shadow: 0px 13px 35px 6px rgba(0, 0, 0, 0.75);
+				right: 30px;
+				width: 100px;
+			}
+			&__user {
+				&-icon {
+					margin-right: 0px;
+					display: block;
+					font-size: 30px;
+				}
+				&-displayName {
+					display: none;
+				}
+			}
 		}
 	}
 }

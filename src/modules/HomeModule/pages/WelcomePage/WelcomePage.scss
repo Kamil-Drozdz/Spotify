@@ -1,22 +1,26 @@
-.container {
-	color: black;
-
-	&__welcome {
-		font-size: 32px;
+.welcome-page {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	&__name,
+	&__email {
+		font-size: 24px;
+		color: var(--color-primary);
 		font-weight: bold;
 	}
 	&__button--logout,
 	&__button--preview {
 		margin-top: 8px;
-		background-color: #65d36e;
+		background-color: var(--color-spotify);
 		border-radius: 50px;
 		border: none;
 		padding: 8px 10%;
 		font-weight: bold;
-
 		cursor: pointer;
 		&:hover {
-			background-color: #4ecf58;
+			background-color: var(--color-spotify-dark);
 		}
 		&:active {
 			opacity: 50%;

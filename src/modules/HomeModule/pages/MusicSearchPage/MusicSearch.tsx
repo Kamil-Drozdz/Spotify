@@ -5,6 +5,7 @@ import './MusicSearch.scss';
 import { AuthContext } from '@/modules/Auth';
 import CategoryDetails from './CategoryDetails';
 import { AiOutlineUser } from 'react-icons/ai';
+import { BsFillPlayFill } from 'react-icons/bs';
 import { auth } from '@/modules/firebase';
 
 type Track = {
@@ -103,7 +104,7 @@ export const MusicSearch: React.FC = () => {
 						setDropdownOpen(!dropdownOpen);
 					}}>
 					<AiOutlineUser title={user?.displayName} className='music-search-header__user-icon' />
-					{user?.displayName}
+					<span className='music-search-header__user-displayName'>{user?.displayName}</span>
 					{dropdownOpen && (
 						<div className='music-search-header__dropdown'>
 							<button>Settings</button>
@@ -120,7 +121,9 @@ export const MusicSearch: React.FC = () => {
 						onClick={() => handleCategoryClick(category.id, category.icons[0].url)}>
 						<img className='category-list__item__image' src={category.icons[0].url} alt={`Icon for ${category.name}`} />
 						<h3>{category.name}</h3>
-						<div className='category-list__item__playicon'>▶</div>
+						<div className='category-list__item__playicon'>
+							<BsFillPlayFill size={32} />
+						</div>
 					</div>
 				))}
 			</div>

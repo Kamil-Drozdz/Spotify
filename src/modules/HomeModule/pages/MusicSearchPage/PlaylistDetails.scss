@@ -1,6 +1,3 @@
-$color-primary: black;
-$color-spotify: #65d36e;
-
 .playlist {
 	display: flex;
 	margin: 0px 5% 60px 5%;
@@ -8,7 +5,7 @@ $color-spotify: #65d36e;
 	align-items: start;
 
 	&-title {
-		background-color: white;
+		background-color: var(--color-secondary);
 		padding: 4px;
 		border-radius: 8px;
 	}
@@ -19,9 +16,9 @@ $color-spotify: #65d36e;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		background-color: black;
+		background-color: var(--color-primary);
 		justify-content: center;
-		color: white;
+		color: var(--color-secondary);
 
 		&__header {
 			justify-content: space-between;
@@ -36,7 +33,7 @@ $color-spotify: #65d36e;
 				margin-right: 25px;
 			}
 			div {
-				margin-left: 10px;
+				margin-left: 18px;
 			}
 			:last-child {
 				margin-right: 20px;
@@ -52,12 +49,12 @@ $color-spotify: #65d36e;
 			border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
 			padding: 2px 0;
 			&--active {
-				border-bottom: 1px solid white;
+				border-bottom: 1px solid var(--color-secondary);
 			}
 			&:hover {
 				background-color: rgb(46, 44, 44);
 				.playlist-details-item__number {
-					background-color: $color-spotify;
+					background-color: var(--color-spotify);
 					border-radius: 50%;
 					height: 20px;
 					inline-size: 20px;
@@ -91,7 +88,7 @@ $color-spotify: #65d36e;
 				font-size: 12px;
 				width: 250px;
 				a {
-					color: white;
+					color: var(--color-secondary);
 					text-decoration: none;
 					&:hover {
 						text-decoration: underline;
@@ -104,14 +101,14 @@ $color-spotify: #65d36e;
 
 			&__avability {
 				width: 100px;
-				color: $color-spotify;
+				color: var(--color-spotify);
 			}
 			&__not-avability {
 				width: 100px;
 				color: red;
 			}
 			&__link {
-				color: $color-spotify;
+				color: var(--color-spotify);
 				text-decoration: none;
 				margin-right: 180px;
 				margin-left: 20px;
@@ -133,7 +130,7 @@ $color-spotify: #65d36e;
 			left: 0;
 			right: 0;
 			height: 80px;
-			background-color: $color-primary;
+			background-color: var(--color-primary);
 			display: flex;
 			justify-content: space-evenly;
 			align-items: center;
@@ -158,7 +155,7 @@ $color-spotify: #65d36e;
 		&__play-button {
 			all: unset;
 			cursor: pointer;
-			background-color: $color-spotify;
+			background-color: var(--color-spotify);
 
 			margin: 0 5%;
 			border-radius: 50%;
@@ -166,7 +163,7 @@ $color-spotify: #65d36e;
 			height: 50px;
 			text-align: center;
 			inline-size: 50px;
-			color: $color-primary;
+			color: var(--color-primary);
 			&--prev,
 			&--next {
 				height: 30px;
@@ -190,7 +187,7 @@ $color-spotify: #65d36e;
 				height: 2px;
 				margin-left: 10px;
 				background: #d3d3d3;
-				accent-color: $color-spotify;
+				accent-color: var(--color-spotify);
 				cursor: pointer;
 			}
 		}
@@ -201,7 +198,7 @@ $color-spotify: #65d36e;
 				appearance: none;
 				width: 100%;
 				height: 2px;
-				accent-color: $color-spotify;
+				accent-color: var(--color-spotify);
 				background: #d3d3d3;
 
 				cursor: pointer;
@@ -211,6 +208,7 @@ $color-spotify: #65d36e;
 			width: 250px;
 			text-align: left;
 			overflow: hidden;
+			color: var(--color-secondary);
 			white-space: nowrap;
 			text-overflow: ellipsis;
 		}
@@ -272,7 +270,7 @@ $color-spotify: #65d36e;
 @media only screen and (max-width: 500px) {
 	.playlist {
 		&-title {
-			font-size: smaller;
+			font-size: 24px;
 		}
 		.playlist-details {
 			&-item {
@@ -301,6 +299,7 @@ $color-spotify: #65d36e;
 					width: auto;
 				}
 				&__progress {
+					margin: 0px 5px;
 					width: auto;
 				}
 				&__image {
@@ -312,5 +311,13 @@ $color-spotify: #65d36e;
 				}
 			}
 		}
+	}
+}
+@media only screen and (max-width: 390px) {
+	.playlist .playlist-details-item__name {
+		max-width: 100px;
+	}
+	.playlist .playlist-details .audio-player-item__progress {
+		width: 75px;
 	}
 }

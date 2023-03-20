@@ -1,6 +1,3 @@
-$color-primary: black;
-$color-spotify: #65d36e;
-
 .categories-details {
 	padding: 10px;
 	border-radius: 8px;
@@ -28,21 +25,21 @@ $color-spotify: #65d36e;
 		background-color: #181818;
 		border-radius: 8px;
 		&__playicon {
-			background-color: $color-spotify;
+			background-color: var(--color-spotify);
 			position: absolute;
 			box-sizing: border-box;
 			text-align: center;
-			display: none;
-			bottom: 5%;
-			inline-size: 43px;
+			opacity: 0;
+			bottom: -20%;
+			inline-size: 46px;
+			height: 44px;
 			right: 5%;
-			color: $color-primary;
-			font-size: 20px;
+			color: var(--color-primary);
 			border-radius: 500px;
 			cursor: pointer;
 			box-shadow: 0px 13px 35px 6px rgba(0, 0, 0, 0.75);
-			transition: transform 0.2s;
-			padding: 10px;
+			transition: 0.3s;
+			padding: 5px;
 		}
 		h3 {
 			width: 100px;
@@ -55,7 +52,8 @@ $color-spotify: #65d36e;
 		}
 		&:hover {
 			.categories-details__item__playicon {
-				display: block;
+				opacity: 1;
+				bottom: 5%;
 				&:hover {
 					transform: scale(1.2);
 				}
@@ -69,11 +67,11 @@ $color-spotify: #65d36e;
 		min-width: 300px;
 		height: 47px;
 		justify-content: center;
-		color: $color-primary;
+		color: var(--color-primary);
 		display: flex;
 		box-sizing: border-box;
 		margin: 0 10%;
-		background-color: $color-spotify;
+		background-color: var(--color-spotify);
 		border-radius: 50px;
 		border: none;
 		padding: 16px 2px;
