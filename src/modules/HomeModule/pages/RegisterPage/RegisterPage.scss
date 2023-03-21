@@ -1,15 +1,15 @@
-.container {
+.register-page {
 	color: black;
 	display: flex;
 	flex-direction: column;
 	height: auto;
 	width: auto;
-
 	justify-content: center;
 	align-items: center;
 	.register-section {
 		width: 20%;
-		.title {
+		box-sizing: border-box;
+		&__title {
 			margin-top: 30px;
 			padding-bottom: 20px;
 			width: 100%;
@@ -19,71 +19,71 @@
 			align-items: center;
 			justify-content: center;
 		}
-		.text-message {
+		&__text-message {
 			font-size: 30px;
 			width: 90%;
 			text-align: center;
 			font-weight: 600;
 		}
-		.buttons {
+		&__buttons {
 			margin-top: 40px;
 			display: flex;
 			flex-direction: column;
-
-			.button-facebook {
-				img {
-					margin-right: 14px;
-				}
-				&:hover {
-					background-color: #3c4f7d;
-				}
-				&:active {
-					opacity: 50%;
-				}
-				transition: 0.3s;
-				display: flex;
-				cursor: pointer;
-				align-items: center;
-				justify-content: center;
-				background-color: #445a90;
-				border-radius: 50px;
-				border: solid 1px black;
-				padding: 8px;
-				font-size: 14px;
-				font-weight: 600;
-				width: 92%;
-				color: white;
-				margin-bottom: 15px;
-			}
-			.button-google {
-				img {
-					scale: 0.8;
-					margin-right: 12px;
-				}
-				&:hover {
-					background-color: #ececec;
-					border: solid 1px #000000;
-				}
-				&:active {
-					opacity: 50%;
-				}
-				transition: 0.3s;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				cursor: pointer;
-				width: 92%;
-				font-size: 14px;
-				font-weight: 400;
-				background-color: white;
-				border-radius: 50px;
-				border: solid 1px rgb(88, 85, 85);
-				padding: 8px;
-				color: black;
-				margin-bottom: 10px;
-			}
 		}
-		.separator {
+		&__button--facebook {
+			img {
+				margin-right: 14px;
+			}
+			&:hover {
+				background-color: #3c4f7d;
+			}
+			&:active {
+				opacity: 50%;
+			}
+			transition: 0.3s;
+			display: flex;
+			cursor: pointer;
+			align-items: center;
+			justify-content: center;
+			background-color: #445a90;
+			border-radius: 50px;
+			border: solid 1px black;
+			padding: 8px;
+			font-size: 14px;
+			font-weight: 600;
+			width: 92%;
+			color: white;
+			margin-bottom: 15px;
+		}
+		&__button--google {
+			img {
+				scale: 0.8;
+				margin-right: 12px;
+			}
+			&:hover {
+				background-color: #ececec;
+				border: solid 1px #000000;
+			}
+			&:active {
+				opacity: 50%;
+			}
+			transition: 0.3s;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			width: 92%;
+			font-size: 14px;
+			font-weight: 400;
+			background-color: white;
+			border-radius: 50px;
+			border: solid 1px rgb(88, 85, 85);
+			padding: 8px;
+			color: black;
+			margin-bottom: 10px;
+		}
+
+		&__separator {
 			color: rgb(88, 85, 85);
 			text-align: center;
 			display: flex;
@@ -100,7 +100,7 @@
 				border: 0.5px solid rgb(145, 140, 140);
 			}
 		}
-		.button-log-in {
+		&__button-log-in {
 			text-decoration: none;
 			color: black;
 			width: 100%;
@@ -137,111 +137,111 @@
 			input:invalid {
 				border: 1px solid red;
 			}
-			.input-error {
-				color: red;
-				position: relative;
-				font-size: 12px;
-				top: -35px;
-			}
-			input[type='number'] {
-				max-width: 3rem;
+		}
+		&__input-error {
+			color: red;
+			position: relative;
+			font-size: 12px;
+			top: -35px;
+		}
+		input[type='number'] {
+			max-width: 3rem;
+			margin-right: 0.5rem;
+		}
+		&__dob-inputs {
+			display: flex;
+			margin-top: 1.5rem;
+			margin-bottom: 1rem;
+
+			select {
+				flex: 1;
 				margin-right: 0.5rem;
 			}
-			.dob-inputs {
-				display: flex;
-				margin-bottom: 1rem;
+		}
+		&__info {
+			font-size: 12px;
+			margin-top: -20px;
+			margin-bottom: 30px;
+		}
 
-				select {
-					flex: 1;
-					margin-right: 0.5rem;
-				}
-			}
-			.info {
-				font-size: 12px;
-				margin-top: -20px;
-				margin-bottom: 30px;
-			}
-			.info-birth {
-				margin-bottom: 30px;
-			}
-			.input-date {
-				position: relative;
-				font-size: 12px;
-				left: 20px;
-				top: -20px;
-			}
-			.radio-buttons {
-				margin-top: 10px;
-				input[type='radio'] {
-					cursor: pointer;
-					font-size: 12px;
-					padding: 0px;
-					margin-bottom: 0px;
-					width: auto;
-					margin-right: 10px;
-					margin-left: 10px;
-				}
-			}
-			.form-checkbox {
-				display: flex;
-				align-items: center;
-				margin-top: 1rem;
-				margin-bottom: 1rem;
-
-				input[type='checkbox'] {
-					cursor: pointer;
-					accent-color: #1db954;
-					width: 10%;
-				}
-			}
-			.info-terms {
-				width: 100%;
-				font-size: 11px;
-				text-align: center;
-				.info-terms-anchor {
-					color: #1db954;
-				}
-			}
-			.error {
-				color: red;
-			}
-			.submit-button {
-				transition: 0.3s;
-				width: 40%;
-				justify-content: center;
-				color: black;
-				display: flex;
-				margin: 0 30%;
-				background-color: #65d36e;
-				border-radius: 50px;
-				border: none;
-				padding: 16px 2px;
-				font-weight: bold;
-				margin-bottom: 30px;
+		&__input-date {
+			position: relative;
+			font-size: 12px;
+			left: 20px;
+			top: -20px;
+		}
+		&__radio-buttons {
+			margin-top: 10px;
+			input[type='radio'] {
 				cursor: pointer;
-				&:hover {
-					background-color: #4ecf58;
-				}
-				&:active {
-					opacity: 50%;
-				}
-			}
-			.spinner {
-				width: 100%;
-				padding-top: 8px;
-				padding-bottom: 5px;
-				display: flex;
-				justify-content: center;
-				margin-bottom: 20px;
+				font-size: 12px;
+				padding: 0px;
+				margin-bottom: 0px;
+				width: auto;
+				margin-right: 10px;
+				margin-left: 10px;
 			}
 		}
-		.login-link {
+		&__form-checkbox {
+			display: flex;
+			align-items: center;
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+
+			input[type='checkbox'] {
+				cursor: pointer;
+				accent-color: #1db954;
+				width: 10%;
+			}
+		}
+		&__info-terms {
+			width: 100%;
+			font-size: 11px;
+			text-align: center;
+			&__info-terms-anchor {
+				color: #1db954;
+			}
+		}
+		&__error {
+			color: red;
+		}
+		&__submit-button {
+			transition: 0.3s;
+			width: 40%;
+			justify-content: center;
+			color: black;
+			display: flex;
+			margin: 0 30%;
+			background-color: #65d36e;
+			border-radius: 50px;
+			border: none;
+			padding: 16px 2px;
+			font-weight: bold;
+			margin-bottom: 30px;
+			cursor: pointer;
+			&:hover {
+				background-color: #4ecf58;
+			}
+			&:active {
+				opacity: 50%;
+			}
+		}
+		&__spinner {
+			width: 100%;
+			padding-top: 8px;
+			padding-bottom: 5px;
+			display: flex;
+			justify-content: center;
+			margin-bottom: 20px;
+		}
+		&__login {
 			white-space: nowrap;
 			width: 40%;
 			margin: 0 30%;
 			font-size: 14px;
 			margin-bottom: 30px;
-			a {
+			&--link {
+				margin-left: 5px;
 				cursor: pointer;
 				color: #1db954;
 			}
@@ -250,7 +250,7 @@
 }
 
 @media only screen and (max-width: 1023px) {
-	.container {
+	.register-page {
 		justify-content: flex-start;
 		padding-top: 20%;
 		.register-section {

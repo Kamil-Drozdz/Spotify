@@ -81,7 +81,7 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 
 	const findNextAvailableTrack = (currentIndex: number, direction: 1 | -1) => {
 		let nextIndex = currentIndex + direction;
-		while (nextIndex >= 0 && nextIndex < tracks.length) {
+		while (nextIndex >= 0 && nextIndex < tracks?.length) {
 			if (tracks[nextIndex]?.track?.preview_url) {
 				return nextIndex;
 			}
@@ -95,6 +95,11 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 		const nextIndex = findNextAvailableTrack(currentIndex, 1);
 		if (nextIndex !== null) {
 			setCurrentTrack(tracks[nextIndex]?.track);
+		} else {
+			const firstAvailableIndex = findNextAvailableTrack(-1, 1);
+			if (firstAvailableIndex !== null) {
+				setCurrentTrack(tracks[firstAvailableIndex]?.track);
+			}
 		}
 	};
 
@@ -217,7 +222,6 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 							/>
 							<span className='playlist-details-item__name'>
 								<a href={track?.track?.artists[0]?.external_urls?.spotify}>{track?.track?.artists[0]?.name}</a>
-
 								<a href={track?.track?.external_urls?.spotify}>{track?.track?.name}</a>
 							</span>
 						</div>
@@ -242,7 +246,7 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 							autoPlay
 							src={currentTrack?.preview_url}
 							onLoadedMetadata={e => setAudioElement(e.currentTarget as HTMLAudioElement)}
-							onEnded={() => setIsPlaying(false)}
+							onEnded={handleNextTrack}
 						/>
 						<div className='audio-player-item__artist'>
 							<img className='audio-player-item__image' src={currentTrack?.album?.images[2]?.url} />

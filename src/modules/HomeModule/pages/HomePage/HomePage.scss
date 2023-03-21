@@ -20,7 +20,7 @@ body {
 
 	.login-section {
 		min-width: 230px;
-		width: 25%;
+		width: 20%;
 
 		&__title {
 			font-size: 24px;
@@ -180,6 +180,9 @@ body {
 				border: 2px solid rgb(145, 140, 140);
 			}
 		}
+		input[type='checkbox'] {
+			width: 20px;
+		}
 		&__reset-password-link {
 			position: relative;
 			text-decoration: underline;
@@ -204,6 +207,7 @@ body {
 					accent-color: $color-spotify;
 					cursor: pointer;
 					margin-right: 20px;
+					size: 20px;
 				}
 			}
 

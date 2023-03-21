@@ -107,9 +107,8 @@ export const RegisterPage: React.FC = () => {
 		try {
 			const user = await createUserWithEmailAndPassword(auth, formValues.email, formValues.password);
 			const userCurrent: any = auth.currentUser;
-			const userName = await updateProfile(userCurrent, { displayName: formValues.displayName }).catch(err =>
-				console.log(err)
-			);
+			const userName = await updateProfile(userCurrent, { displayName: formValues.displayName });
+
 			toast.success('account has been created, log in');
 			setTimeout(() => {
 				navigate('/');
@@ -124,22 +123,22 @@ export const RegisterPage: React.FC = () => {
 	};
 
 	return (
-		<div className='container'>
+		<div className='register-page'>
 			<div className='register-section'>
-				<h1 className='title'>Spotify</h1>
-				<p className='text-message'>Sign up for free to start listening.</p>
-				<div className='buttons'>
-					<a className='button-facebook'>
+				<h1 className='register-section__title'>Spotify</h1>
+				<p className='register-section__text-message'>Sign up for free to start listening.</p>
+				<div className='register-section__buttons'>
+					<a className='register-section__button--facebook'>
 						<img src={logoFacebook} />
 						Sign in with Facebook
 					</a>
-					<a className='button-google'>
+					<a className='register-section__button--google'>
 						<img src={logoGoogle} />
 						Sign in with Google
 					</a>
 				</div>
-				<p className='separator'>or</p>
-				<a href='#' className='button-log-in'>
+				<p className='register-section__separator'>or</p>
+				<a href='#' className='register-section__button-log-in'>
 					Sign up wiuth your email adress
 				</a>
 				<form onSubmit={handleSubmit}>
@@ -152,7 +151,7 @@ export const RegisterPage: React.FC = () => {
 						value={formValues.email}
 						onChange={handleChange}
 					/>
-					<p className='input-error'>{error.email}</p>
+					<p className='register-section__input-error'>{error.email}</p>
 					<label htmlFor='confirmEmail'>Confirm your email</label>
 					<input
 						placeholder='Enter your email again'
@@ -162,7 +161,7 @@ export const RegisterPage: React.FC = () => {
 						value={formValues.confirmEmail}
 						onChange={handleChange}
 					/>
-					<p className='input-error'>{error.confirmEmail}</p>
+					<p className='register-section__input-error'>{error.confirmEmail}</p>
 					<label htmlFor='password'>Password</label>
 					<input
 						placeholder='Enter your password'
@@ -173,7 +172,7 @@ export const RegisterPage: React.FC = () => {
 						onChange={handleChange}
 						minLength={MIN_PASSWORD_LENGTH}
 					/>
-					<p className='input-error'>{error.password}</p>
+					<p className='register-section__input-error'>{error.password}</p>
 					<label htmlFor='displayName'>What should we call you</label>
 					<input
 						type='text'
@@ -184,14 +183,13 @@ export const RegisterPage: React.FC = () => {
 						onChange={handleChange}
 						minLength={MIN_DISPLAYNAME_LENGTH}
 					/>
-					<p className='input-error'>{error.displayName}</p>
-					<p className='info'>This appears on your profile</p>
-
-					<label className='info-birth' htmlFor='dob-month'>
+					<p className='register-section__input-error'>{error.displayName}</p>
+					<p className='register-section__info'>This appears on your profile</p>
+					<label className='register-section__info-birth' htmlFor='dob-month'>
 						Whats your date of birth?
 					</label>
-					<div className='dob-inputs'>
-						<label className='input-date' htmlFor='dob-month'>
+					<div className='register-section__dob-inputs'>
+						<label className='register-section__input-date' htmlFor='dob-month'>
 							Month
 						</label>
 						<select id='dob-month' name='dobMonth' value={formValues.dobMonth} onChange={handleChange}>
@@ -211,7 +209,7 @@ export const RegisterPage: React.FC = () => {
 							<option value='11'>November</option>
 							<option value='12'>December</option>
 						</select>
-						<label className='input-date' htmlFor='dob-day'>
+						<label className='register-section__input-date' htmlFor='dob-day'>
 							Day
 						</label>
 						<input
@@ -224,7 +222,7 @@ export const RegisterPage: React.FC = () => {
 							value={formValues.dobDay}
 							onChange={handleChange}
 						/>
-						<label className='input-date' htmlFor='dob-year'>
+						<label className='register-section__input-date' htmlFor='dob-year'>
 							Year
 						</label>
 						<input
@@ -238,11 +236,11 @@ export const RegisterPage: React.FC = () => {
 							onChange={handleChange}
 						/>
 					</div>
-					<p className='input-error'>{error.dobMonth}</p>
+					<p className='register-section__input-error'>{error.dobMonth}</p>
 
 					<label htmlFor='gender'>Whats your gender?</label>
 					<div>
-						<div className='radio-buttons'>
+						<div className='register-section__radio-buttons'>
 							<label>
 								<input
 									type='radio'
@@ -291,11 +289,11 @@ export const RegisterPage: React.FC = () => {
 								/>
 								Other
 							</label>
-							<p className='input-error'>{error.gender}</p>
+							<p className='register-section__input-error'>{error.gender}</p>
 						</div>
 					</div>
 
-					<div className='form-checkbox'>
+					<div className='register-section__form-checkbox'>
 						<input
 							type='checkbox'
 							min='0'
@@ -305,37 +303,40 @@ export const RegisterPage: React.FC = () => {
 							onChange={handleChange}
 							required
 						/>
-						<label htmlFor='marketing-checkbox'>
+						<label htmlFor='register-section__marketing-checkbox'>
 							Share my registration date with Spotifys content providers for marketing purposes.
 						</label>
-						<p className='input-error'>{error.marketingConsent}</p>
+						<p className='register-section__input-error'>{error.marketingConsent}</p>
 					</div>
-					<p className='info-terms'>
+					<p className='register-section__info-terms'>
 						By clicking on sing-up. you afree to Spotifys{' '}
-						<a className='info-terms-anchor' href='#'>
+						<a className='register-section__info-terms-anchor' href='#'>
 							Terms and Conditions of Use.
 						</a>
 					</p>
-					<p className='info-terms'>
+					<p className='register-section__info-terms'>
 						To learn more about how. Spotify collects,uses,shares, and proctects your personal data,please see{' '}
-						<a className='info-terms-anchor' href='#'>
+						<a className='register-section__info-terms-anchor' href='#'>
 							Spotifys Privacy Policy.
 						</a>
 					</p>
 
-					<p className='error'>{error.info}</p>
+					<p className='register-section__error'>{error.info}</p>
 					{isLoading ? (
-						<div className='spinner'>
+						<div className='register-section__spinner'>
 							<RotatingLines strokeColor='green' strokeWidth='5' animationDuration='0.55' width='48' visible={true} />
 						</div>
 					) : (
-						<button className='submit-button' type='submit'>
+						<button className='register-section__submit-button' type='submit'>
 							Sign up
 						</button>
 					)}
 				</form>
-				<p className='login-link'>
-					Have an account? <a onClick={handleLoginClick}>log in</a>
+				<p className='register-section__login'>
+					Have an account?
+					<a className='register-section__login--link' onClick={handleLoginClick}>
+						log in
+					</a>
 				</p>
 			</div>
 			<ToastContainer
