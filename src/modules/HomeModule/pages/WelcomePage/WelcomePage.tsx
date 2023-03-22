@@ -26,7 +26,7 @@ const WelcomePage: React.FC = () => {
 			<button
 				className='welcome-page__button--preview'
 				onClick={() => {
-					navigate('/music-search');
+					navigate('/homepage');
 				}}>
 				see preview!
 			</button>

@@ -1,6 +1,6 @@
 .playlist {
 	display: flex;
-	margin: 0px 5% 60px 5%;
+	margin: 0px 5% 160px 5%;
 	flex-direction: column;
 	align-items: start;
 
@@ -157,7 +157,7 @@
 			left: 0;
 			right: 0;
 			height: 80px;
-			background-color: var(--color-primary);
+			background-color: #1f4250;
 			display: flex;
 			justify-content: space-evenly;
 			align-items: center;
@@ -277,6 +277,8 @@
 				&__now-playing {
 					height: auto;
 					width: 200px;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 				&__play-button {
 					margin-left: 50px;
@@ -346,6 +348,11 @@
 	}
 	.playlist .playlist-details .audio-player-item__progress {
 		width: 75px;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.playlist .playlist-details__audio-player {
+		bottom: 60px;
 	}
 }
 
