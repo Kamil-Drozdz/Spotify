@@ -225,6 +225,9 @@
 			&:active {
 				opacity: 50%;
 			}
+			&:disabled {
+				opacity: 30%;
+			}
 		}
 		&__spinner {
 			width: 100%;

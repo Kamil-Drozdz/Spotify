@@ -72,7 +72,9 @@ export const HomePage: React.FC = () => {
 							/>
 							<p>Remember me</p>
 						</label>
-						<button className='login-section__login__button-log-in'>Sign up</button>
+						<button disabled={!email || !password} className='login-section__login__button-log-in'>
+							Sign up
+						</button>
 					</div>
 				</form>
 				<div>

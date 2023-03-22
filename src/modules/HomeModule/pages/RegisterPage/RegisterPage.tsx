@@ -64,15 +64,40 @@ export const RegisterPage: React.FC = () => {
 				[name]: checked,
 			}));
 		} else {
+			if (name === 'dobDay' || name === 'dobMonth' || name === 'dobYear') {
+				const currentDate = new Date();
+				const currentYear = currentDate.getFullYear();
+				const minYear = currentYear - 100;
+				const maxYear = currentYear;
+				const day = name === 'dobDay' ? value : formValues.dobDay;
+				const month = name === 'dobMonth' ? value : formValues.dobMonth;
+				const year = name === 'dobYear' ? value : formValues.dobYear;
+				const dateOfBirth = new Date(Number(year), Number(month) - 1, Number(day));
+				const typeYear = Number(year);
+				if (typeYear < minYear || typeYear > maxYear) {
+					errorMsg = `Please enter a valid year between ${minYear} and ${maxYear}`;
+				} else if (dateOfBirth > currentDate) {
+					errorMsg = 'Please enter a valid date in the past';
+				} else {
+					errorMsg = '';
+				}
+			}
+			if (name === 'gender') {
+				if (value === '') {
+					errorMsg = 'Please select a valid gender';
+				} else {
+					errorMsg = '';
+				}
+			}
 			if (name === 'email') {
 				const emailRegex = /^\S+@\S+\.\S+$/;
-				if (!emailRegex.test(value)) {
+				if (!emailRegex.test(value) || '') {
 					errorMsg = 'Please enter a valid email address';
 				}
-			} else if (name === 'confirmEmail') {
-				if (value !== formValues.email) {
-					errorMsg = 'Email addresses do not match';
-				}
+				// } else if (name === 'confirmEmail') {
+				// 	if (value !== formValues.email) {
+				// 		errorMsg = 'Email addresses do not match';
+				// 	}
 			} else if (name === 'password') {
 				if (value.length < MIN_PASSWORD_LENGTH) {
 					errorMsg = `Password must be at least ${MIN_PASSWORD_LENGTH} characters`;
@@ -83,6 +108,8 @@ export const RegisterPage: React.FC = () => {
 				if (value.length < MIN_DISPLAYNAME_LENGTH) {
 					errorMsg = `Name must be at least ${MIN_DISPLAYNAME_LENGTH} characters`;
 				}
+			} else {
+				errorMsg = '';
 			}
 
 			setFormValues(prevValues => ({
@@ -96,10 +123,6 @@ export const RegisterPage: React.FC = () => {
 			}));
 		}
 	};
-
-	function handleLoginClick() {
-		navigate('/');
-	}
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -152,7 +175,7 @@ export const RegisterPage: React.FC = () => {
 						onChange={handleChange}
 					/>
 					<p className='register-section__input-error'>{error.email}</p>
-					<label htmlFor='confirmEmail'>Confirm your email</label>
+					{/* <label htmlFor='confirmEmail'>Confirm your email</label>
 					<input
 						placeholder='Enter your email again'
 						type='email'
@@ -161,7 +184,7 @@ export const RegisterPage: React.FC = () => {
 						value={formValues.confirmEmail}
 						onChange={handleChange}
 					/>
-					<p className='register-section__input-error'>{error.confirmEmail}</p>
+					<p className='register-section__input-error'>{error.confirmEmail}</p> */}
 					<label htmlFor='password'>Password</label>
 					<input
 						placeholder='Enter your password'
@@ -216,9 +239,9 @@ export const RegisterPage: React.FC = () => {
 							type='number'
 							id='dob-day'
 							name='dobDay'
-							placeholder='DD'
 							min='0'
 							max='31'
+							placeholder='DD'
 							value={formValues.dobDay}
 							onChange={handleChange}
 						/>
@@ -229,15 +252,14 @@ export const RegisterPage: React.FC = () => {
 							type='number'
 							id='dob-year'
 							name='dobYear'
-							placeholder='YYYY'
 							min='1900'
 							max='2050'
+							placeholder='YYYY'
 							value={formValues.dobYear}
 							onChange={handleChange}
 						/>
 					</div>
-					<p className='register-section__input-error'>{error.dobMonth}</p>
-
+					<p className='register-section__input-error'>{error.dobDay || error.dobMonth || error.dobYear}</p>
 					<label htmlFor='gender'>Whats your gender?</label>
 					<div>
 						<div className='register-section__radio-buttons'>
@@ -249,7 +271,6 @@ export const RegisterPage: React.FC = () => {
 									value='male'
 									checked={formValues.gender === 'male'}
 									onChange={handleChange}
-									required
 								/>
 								Male
 							</label>
@@ -261,7 +282,6 @@ export const RegisterPage: React.FC = () => {
 									value='female'
 									checked={formValues.gender === 'female'}
 									onChange={handleChange}
-									required
 								/>
 								Female
 							</label>
@@ -273,7 +293,6 @@ export const RegisterPage: React.FC = () => {
 									value='non-binary'
 									checked={formValues.gender === 'non-binary'}
 									onChange={handleChange}
-									required
 								/>
 								Non-binary
 							</label>
@@ -285,7 +304,6 @@ export const RegisterPage: React.FC = () => {
 									value='other'
 									checked={formValues.gender === 'other'}
 									onChange={handleChange}
-									required
 								/>
 								Other
 							</label>
@@ -301,21 +319,20 @@ export const RegisterPage: React.FC = () => {
 							name='marketingConsent'
 							checked={formValues.marketingConsent}
 							onChange={handleChange}
-							required
 						/>
-						<label htmlFor='register-section__marketing-checkbox'>
+						<label htmlFor='marketing-checkbox'>
 							Share my registration date with Spotifys content providers for marketing purposes.
 						</label>
 						<p className='register-section__input-error'>{error.marketingConsent}</p>
 					</div>
 					<p className='register-section__info-terms'>
-						By clicking on sing-up. you afree to Spotifys{' '}
+						By clicking on sing-up. you afree to Spotifys
 						<a className='register-section__info-terms-anchor' href='#'>
 							Terms and Conditions of Use.
 						</a>
 					</p>
 					<p className='register-section__info-terms'>
-						To learn more about how. Spotify collects,uses,shares, and proctects your personal data,please see{' '}
+						To learn more about how. Spotify collects,uses,shares, and proctects your personal data,please see
 						<a className='register-section__info-terms-anchor' href='#'>
 							Spotifys Privacy Policy.
 						</a>
@@ -327,14 +344,35 @@ export const RegisterPage: React.FC = () => {
 							<RotatingLines strokeColor='green' strokeWidth='5' animationDuration='0.55' width='48' visible={true} />
 						</div>
 					) : (
-						<button className='register-section__submit-button' type='submit'>
+						<button
+							disabled={
+								!!error.displayName ||
+								!!error.email ||
+								!!error.gender ||
+								!!error.confirmEmail ||
+								!!error.password ||
+								!formValues.displayName ||
+								!formValues.email ||
+								// !formValues.confirmEmail ||
+								!formValues.password ||
+								!formValues.dobDay ||
+								!formValues.dobMonth ||
+								!formValues.dobYear ||
+								!formValues.gender
+							}
+							className='register-section__submit-button'
+							type='submit'>
 							Sign up
 						</button>
 					)}
 				</form>
 				<p className='register-section__login'>
 					Have an account?
-					<a className='register-section__login--link' onClick={handleLoginClick}>
+					<a
+						className='register-section__login--link'
+						onClick={() => {
+							navigate('/');
+						}}>
 						log in
 					</a>
 				</p>
