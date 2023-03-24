@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BsFillPlayFill } from 'react-icons/bs';
 import { useSpotify } from '../../../CustomHooks/useSpotify';
-import './CategoryDetails.scss';
 import { PlaylistDetails } from './PlaylistDetails';
+import './CategoryDetails.scss';
 
 interface CategoryIdDetails {
 	categoryId: string;

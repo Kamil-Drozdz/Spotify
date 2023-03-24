@@ -57,7 +57,7 @@ function Header() {
 				</button>
 				<button
 					onClick={() => {
-						navigate('/liblary');
+						navigate('/homepage');
 					}}
 					className={`header-buttons--liblary ${location.pathname === '/liblary' ? 'active' : ''}`}>
 					<BiLibrary size={30} />
@@ -70,13 +70,13 @@ function Header() {
 					}}>
 					<AiOutlineUser title={user?.displayName} size={30} className='header-buttons--user-icon' />
 					<p className='header-buttons--user-displayName'>{user?.displayName}</p>
-					{dropdownOpen && (
-						<div className='header-buttons--user-dropdown'>
-							<button>Settings</button>
-							<button onClick={handleLogout}>Logout</button>
-						</div>
-					)}
 				</button>
+				{dropdownOpen && (
+					<div className='header-buttons--user-dropdown'>
+						<button>Settings</button>
+						<button onClick={handleLogout}>Logout</button>
+					</div>
+				)}
 			</div>
 		</header>
 	);

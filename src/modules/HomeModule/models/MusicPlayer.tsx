@@ -28,7 +28,6 @@ function MusicPlayer() {
 	useEffect(() => {
 		if (container.current) {
 			const textWidth = container.current.scrollWidth;
-			console.log(textWidth);
 			if (textWidth > 250) {
 				setMarquee(true);
 			} else {

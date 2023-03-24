@@ -5,6 +5,7 @@ import './WelcomePage.scss';
 
 const WelcomePage: React.FC = () => {
 	const navigate = useNavigate();
+
 	const handleLogout = async () => {
 		try {
 			await auth.signOut();
