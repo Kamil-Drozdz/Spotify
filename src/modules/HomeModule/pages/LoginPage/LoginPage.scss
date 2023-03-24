@@ -173,7 +173,8 @@ body {
 			}
 		}
 		input[type='checkbox'] {
-			width: 20px;
+			width: 15px;
+			height: 15px;
 		}
 		&__reset-password-link {
 			position: relative;
@@ -261,10 +262,9 @@ body {
 }
 
 @media only screen and (max-width: 1023px) {
-	.login {
+	.login-page {
 		justify-content: flex-start;
 		padding-bottom: 20%;
-
 		.login-section {
 			width: 40%;
 			max-width: 600px;
@@ -272,10 +272,9 @@ body {
 	}
 }
 @media only screen and (max-width: 768px) {
-	.login {
+	.login-page {
 		justify-content: flex-start;
 		padding-bottom: 20%;
-
 		.login-section {
 			width: 80%;
 			max-width: 600px;

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useSpotify } from '../../../customHooks/useSpotify';
+import { useSpotify } from '../../../CustomHooks/useSpotify';
 import './MusicSearchPage.scss';
 import Header from '../../models/Header';
 import CategoryDetails from '../HomePage/CategoryDetails';
+import { BsFillPlayFill } from 'react-icons/bs';
 
 type Track = {
 	id: string;
@@ -80,62 +81,68 @@ export const MusicSearchPage: React.FC = () => {
 	};
 
 	return (
-		<div style={containerStyle} className='music-search-page'>
+		<>
+			{' '}
 			<Header />
-			<input
-				className='music-search-page__input'
-				type='text'
-				value={query}
-				onChange={handleSearch}
-				placeholder='What do you want to hear?'
-			/>
-			{query ? (
-				<div className='music-search-page__track-list'>
-					{tracks?.map(track => (
-						<div key={track.id} className='track-list__item'>
-							<h3>Track name: {track.name}</h3>
-							<p>
-								Artist:
-								{track.artists.map((artist, index) => (
-									<span key={index}>{(index ? ', ' : '') + artist.name}</span>
-								))}
-							</p>
-							<p>Album: {track.album.name}</p>
-							{track.album.images[0] && (
-								<img
-									className='track-list__image'
-									src={track.album.images[0].url}
-									alt={`Album cover for ${track.album.name}`}
-								/>
-							)}
-							Try this track!
-							<audio src={track.preview_url} controls />
-							<p>Popularity: {track.popularity}</p>
-							<a href={track.external_urls.spotify}>Full track here</a>
-						</div>
-					))}
-				</div>
-			) : (
-				<div className='music-search-page__categories'>
-					<h2 className='music-search-page__categories-title'>Your favorite categories</h2>
-					<div className='music-search-page__category-list'>
-						{categories?.map(category => (
-							<div
-								className='music-search-page__category-item'
-								key={category.id}
-								onClick={() => handleCategoryClick(category.id, category.icons[0].url)}>
-								<img
-									className='music-search-page__category-image'
-									src={category.icons[0].url}
-									alt={`Icon for ${category.name}`}
-								/>
-								<h3 className='music-search-page__category-name'>{category.name}</h3>
+			<div style={containerStyle} className='music-search-page'>
+				<input
+					className='music-search-page__input'
+					type='text'
+					value={query}
+					onChange={handleSearch}
+					placeholder='What do you want to hear?'
+				/>
+				{query ? (
+					<div className='music-search-page__track-list'>
+						{tracks?.map(track => (
+							<div key={track.id} className='track-list__item'>
+								<h3>Track name: {track.name}</h3>
+								<p>
+									Artist:
+									{track.artists.map((artist, index) => (
+										<span key={index}>{(index ? ', ' : '') + artist.name}</span>
+									))}
+								</p>
+								<p>Album: {track.album.name}</p>
+								{track.album.images[0] && (
+									<img
+										className='track-list__image'
+										src={track.album.images[0].url}
+										alt={`Album cover for ${track.album.name}`}
+									/>
+								)}
+								Try this track!
+								<audio src={track.preview_url} controls />
+								<p>Popularity: {track.popularity}</p>
+								<a href={track.external_urls.spotify}>Full track here</a>
 							</div>
 						))}
 					</div>
-					{selectedCategory && <CategoryDetails categoryId={selectedCategory} />}
-				</div>
-			)}
-		</div>
+				) : (
+					<div className='music-search-page__categories'>
+						<h2 className='music-search-page__categories-title'>Your favorite categories</h2>
+						<div className='music-search-page__category-list'>
+							{categories?.map(category => (
+								<div
+									className='music-search-page__category-item'
+									key={category.id}
+									onClick={() => handleCategoryClick(category.id, category.icons[0].url)}>
+									<img
+										className='music-search-page__category-image'
+										src={category.icons[0].url}
+										alt={`Icon for ${category.name}`}
+									/>
+									<h3 className='music-search-page__category-name'>{category.name}</h3>
+									<div className='music-search-page__category--playicon'>
+										<BsFillPlayFill size={32} />
+									</div>
+								</div>
+							))}
+						</div>
+						{selectedCategory && <CategoryDetails categoryId={selectedCategory} />}
+					</div>
+				)}
+			</div>
+		</>
 	);
 };

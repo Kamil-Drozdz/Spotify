@@ -1,11 +1,14 @@
 .header {
 	width: 100%;
+	position: fixed;
 	background-color: #1d2226;
 	color: #b3b3b3;
 	box-sizing: border-box;
+	z-index: 100;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 11 ;
 	&-logo {
 		all: unset;
 		display: flex;
@@ -33,6 +36,7 @@
 				margin: 0px 10px 0 0;
 			}
 			&-dropdown {
+				z-index: 1;
 				color: white;
 				position: absolute;
 				background-color: #353333;
@@ -41,7 +45,6 @@
 				height: auto;
 				top: 50px;
 				right: 20px;
-				z-index: 1;
 				width: 100px;
 				display: flex;
 				flex-direction: column;
@@ -55,6 +58,8 @@
 					box-sizing: border-box;
 					border-bottom: 1px solid hsla(0, 0%, 100%, 0.6);
 					&:hover {
+						border-radius: 4px;
+						background-color: gray;
 						border-bottom: 1px solid hsla(0, 11%, 4%, 0.6);
 					}
 				}
@@ -85,9 +90,8 @@
 }
 @media only screen and (max-width: 768px) {
 	.header {
-		position: fixed;
 		bottom: 0;
-		z-index: 10;
+
 		&-logo {
 			display: none;
 		}
@@ -99,7 +103,9 @@
 			&--search,
 			&--liblary,
 			&--user {
-				width: auto;
+				padding: 0;
+				transition: width ease-in-out 3s;
+				width: 25%;
 				flex-direction: column;
 				font-size: 12px;
 				&-dropdown {

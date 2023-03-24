@@ -6,7 +6,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { TbBrandSpotify } from 'react-icons/tb';
 import './Header.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AuthContext } from '@/modules/Auth';
+import { AuthContext } from '@/modules/ContextApi/Auth';
 import { auth } from '@/modules/firebase';
 
 type Auth = {

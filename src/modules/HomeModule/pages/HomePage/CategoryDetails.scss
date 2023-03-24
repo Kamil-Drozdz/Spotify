@@ -4,12 +4,12 @@
 	background-color: #181818;
 	overflow-x: scroll;
 	height: 240px;
-	margin: 0 5%;
+	margin: 30px 5% 10px 5%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	flex-wrap: wrap;
-	margin-bottom: 10px;
+
 	.categories-details__item {
 		box-shadow: 8px 11px 31px 10px rgba(66, 68, 90, 1);
 		width: 220px;

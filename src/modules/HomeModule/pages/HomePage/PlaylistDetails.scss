@@ -1,6 +1,6 @@
 .playlist {
 	display: flex;
-	margin: 0px 5% 160px 5%;
+	margin: 0px 5% 20px 5%;
 	flex-direction: column;
 	align-items: start;
 
@@ -148,97 +148,6 @@
 				width: 10px;
 			}
 		}
-
-		&__audio-player {
-			user-select: none;
-			border-top: 1px solid hsla(0, 0%, 100%, 0.6);
-			position: fixed;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			height: 80px;
-			background-color: #1f4250;
-			display: flex;
-			justify-content: space-evenly;
-			align-items: center;
-			z-index: 10;
-		}
-
-		audio {
-			display: none;
-		}
-	}
-	.audio-player-item {
-		&__artist {
-			display: flex;
-			align-items: center;
-		}
-		&__console {
-			width: 220px;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-		}
-		&__play-button {
-			all: unset;
-			cursor: pointer;
-			background-color: var(--color-spotify);
-
-			margin: 0 5%;
-			border-radius: 50%;
-			box-sizing: border-box;
-			height: 50px;
-			text-align: center;
-			inline-size: 50px;
-			color: var(--color-primary);
-			&--prev,
-			&--next {
-				height: 30px;
-				width: 50px;
-				border-radius: 4px;
-				font-weight: bold;
-			}
-		}
-		&__image {
-			object-fit: cover;
-			margin-right: 30px;
-		}
-		&__volume {
-			display: flex;
-			flex-wrap: nowrap;
-			cursor: pointer;
-			align-items: center;
-			input[type='range'] {
-				appearance: none;
-				width: 100%;
-				height: 2px;
-				margin-left: 10px;
-				background: #d3d3d3;
-				accent-color: var(--color-spotify);
-				cursor: pointer;
-			}
-		}
-
-		&__progress {
-			cursor: pointer;
-			input[type='range'] {
-				appearance: none;
-				width: 100%;
-				height: 2px;
-				accent-color: var(--color-spotify);
-				background: #d3d3d3;
-
-				cursor: pointer;
-			}
-		}
-		&__now-playing {
-			width: 250px;
-			text-align: left;
-			overflow: hidden;
-			color: var(--color-secondary);
-			white-space: nowrap;
-			text-overflow: ellipsis;
-		}
 	}
 }
 
@@ -266,32 +175,6 @@
 			&__audio-player {
 				display: flex;
 				justify-content: space-around;
-			}
-
-			.audio-player-item {
-				&__console {
-					flex-direction: row-reverse;
-					align-items: center;
-					width: auto;
-				}
-				&__now-playing {
-					height: auto;
-					width: 200px;
-					overflow: hidden;
-					text-overflow: ellipsis;
-				}
-				&__play-button {
-					margin-left: 50px;
-					margin-right: 10px;
-					&--prev,
-					&--next {
-						display: none;
-					}
-				}
-
-				&__volume {
-					display: none;
-				}
 			}
 		}
 	}
@@ -322,23 +205,6 @@
 					font-size: 10px;
 				}
 			}
-			.audio-player-item {
-				&__now-playing {
-					font-size: 10px;
-					width: auto;
-				}
-				&__progress {
-					margin: 0px 5px;
-					width: auto;
-				}
-				&__image {
-					margin-left: 10px;
-					margin-right: 10px;
-				}
-				&__play-button {
-					margin-left: 20px;
-				}
-			}
 		}
 	}
 }
@@ -350,12 +216,6 @@
 		width: 75px;
 	}
 }
-@media only screen and (max-width: 768px) {
-	.playlist .playlist-details__audio-player {
-		bottom: 60px;
-	}
-}
-
 @keyframes bounce {
 	10% {
 		transform: scaleY(0.3);

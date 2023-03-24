@@ -1,4 +1,4 @@
-import { AuthContext } from '../Auth';
+import { AuthContext } from '../ContextApi/Auth';
 import { useContext, useEffect, useState } from 'react';
 
 interface AccessToken {

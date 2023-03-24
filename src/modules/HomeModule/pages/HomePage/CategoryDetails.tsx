@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BsFillPlayFill } from 'react-icons/bs';
-import { useSpotify } from '../../../customHooks/useSpotify';
+import { useSpotify } from '../../../CustomHooks/useSpotify';
 import './CategoryDetails.scss';
 import { PlaylistDetails } from './PlaylistDetails';
 
@@ -57,7 +57,7 @@ const CategoryDetails: React.FC<CategoryIdDetails> = ({ categoryId }) => {
 						onClick={() => handlePlaylistClick(playlist?.id)}>
 						<img
 							className='categories-details__item__image'
-							src={playlist?.images[0]?.url}
+							src={playlist?.images[0].url}
 							alt={playlist?.description}
 						/>
 						<div className='categories-details__item__playicon'>

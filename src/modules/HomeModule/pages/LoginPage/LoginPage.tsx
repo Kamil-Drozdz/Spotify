@@ -4,7 +4,7 @@ import './LoginPage.scss';
 import logoFacebook from '../../../../assets/images/icons8-facebook-30.png';
 import logoApple from '../../../../assets/images/Apple-logo.png';
 import logoGoogle from '../../../../assets/images/icons8-google-30.png';
-import { AuthContext } from '../../../Auth';
+import { AuthContext } from '../../../ContextApi/Auth';
 
 export const LoginPage: React.FC = () => {
 	interface Auth {
