@@ -1,8 +1,28 @@
 :root {
 	--color-primary: black;
 	--color-secondary: white;
+	--color-dark: #1d2226;
+	--color-light-gray: #757575;
+	--color-dark-gray: #181818;
 	--color-spotify: #65d36e;
 	--color-spotify-dark: #4ecf58;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: #353333;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-spotify);
+	border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--color-spotify-dark);
 }
 @keyframes marquee {
 	0% {

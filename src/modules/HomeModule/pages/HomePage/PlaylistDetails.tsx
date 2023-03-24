@@ -55,15 +55,15 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 				{tracks?.map((track: Track, index: number) => (
 					<div
 						className={`playlist-details-item ${
-							track.track.id === currentTrack?.id ? 'playlist-details-item--active' : ''
+							track?.track.id === currentTrack?.id ? 'playlist-details-item--active' : ''
 						}`}
 						onMouseEnter={() => setHoveredTrack(index + 1)}
 						onMouseLeave={() => setHoveredTrack(null)}
-						key={track.track.id}
+						key={track?.track.id}
 						onClick={() => setCurrentTrack(track?.track)}>
 						{track?.track?.preview_url ? (
 							<p className='playlist-details-item__number'>
-								{index + 1 === hoveredTrack && track.track.id === currentTrack?.id ? (
+								{index + 1 === hoveredTrack && track?.track.id === currentTrack?.id ? (
 									isPlaying ? (
 										<BiPause onClick={() => setIsPlaying(false)} />
 									) : (
@@ -71,7 +71,7 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 									)
 								) : index + 1 === hoveredTrack ? (
 									<BsFillPlayFill onClick={() => setIsPlaying(true)} />
-								) : isPlaying && track.track.id === currentTrack?.id ? (
+								) : isPlaying && track?.track.id === currentTrack?.id ? (
 									<div className='playlist-details-item__number playlist-details-item__number--bar'>
 										<span />
 										<span />

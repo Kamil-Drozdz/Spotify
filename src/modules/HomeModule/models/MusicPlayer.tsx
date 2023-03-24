@@ -48,9 +48,9 @@ function MusicPlayer() {
 				<img className='audio-player-item__image' src={currentTrack?.album?.images[2]?.url} />
 				<span ref={container} className='audio-player-item__now-playing'>
 					<div className={`audio-player-item__artist ${marquee ? 'marquee' : ''}`}>
-						{currentTrack?.artists[0]?.name}
-						<br />
 						{currentTrack?.name}
+						<br />
+						<p className='audio-player-item__artist--name'>{currentTrack?.artists[0]?.name}</p>
 					</div>
 				</span>
 			</div>

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useSpotify } from '../../../CustomHooks/useSpotify';
 import './MusicSearchPage.scss';
 import Header from '../../models/Header';
 import CategoryDetails from '../HomePage/CategoryDetails';
 import { BsFillPlayFill } from 'react-icons/bs';
+import { MusicPlayerContext, typeMusicPlayerContext } from '@/modules/ContextApi/MusicPlayerContext';
 
 type Track = {
 	id: string;
@@ -33,6 +34,7 @@ interface CategoriesResponse {
 }
 
 export const MusicSearchPage: React.FC = () => {
+	const { setCurrentTrack } = useContext(MusicPlayerContext) as typeMusicPlayerContext;
 	const [query, setQuery] = useState<string>('');
 	const [tracks, setTracks] = useState<Track[]>([]);
 	const [categories, setCategories] = useState<Category[]>([]);
@@ -80,13 +82,18 @@ export const MusicSearchPage: React.FC = () => {
 		backgroundImage: categoryBackground ? `url(${categoryBackground})` : '',
 	};
 
+	const handleTrackClick = (track: Track) => {
+		if (track.preview_url) {
+			setCurrentTrack(track);
+		}
+	};
+
 	return (
 		<>
-			{' '}
 			<Header />
 			<div style={containerStyle} className='music-search-page'>
 				<input
-					className='music-search-page__input'
+					className='music-search-page--input'
 					type='text'
 					value={query}
 					onChange={handleSearch}
@@ -95,26 +102,28 @@ export const MusicSearchPage: React.FC = () => {
 				{query ? (
 					<div className='music-search-page__track-list'>
 						{tracks?.map(track => (
-							<div key={track.id} className='track-list__item'>
-								<h3>Track name: {track.name}</h3>
-								<p>
-									Artist:
-									{track.artists.map((artist, index) => (
-										<span key={index}>{(index ? ', ' : '') + artist.name}</span>
-									))}
-								</p>
-								<p>Album: {track.album.name}</p>
-								{track.album.images[0] && (
+							<div key={track?.id} className='track-list__item' onClick={() => handleTrackClick(track)}>
+								{track?.album.images[0] && (
 									<img
 										className='track-list__image'
-										src={track.album.images[0].url}
-										alt={`Album cover for ${track.album.name}`}
+										src={track?.album.images[0].url}
+										alt={`Album cover for ${track?.album.name}`}
 									/>
 								)}
-								Try this track!
-								<audio src={track.preview_url} controls />
-								<p>Popularity: {track.popularity}</p>
-								<a href={track.external_urls.spotify}>Full track here</a>
+								<h3>Track name: {track?.name}</h3>
+								<p>
+									Artist:
+									{track?.artists.map((artist, index) => (
+										<span key={index}>{(index ? ', ' : '') + artist?.name}</span>
+									))}
+								</p>
+								<p>Album: {track?.album.name}</p>
+								{track?.preview_url ? '' : <p>Preview not available</p>}
+								<p>Popularity: {track?.popularity}</p>
+								<a href={track?.external_urls.spotify}>Full track here</a>
+								<div className='track-list__item--playicon'>
+									<BsFillPlayFill size={32} />
+								</div>
 							</div>
 						))}
 					</div>
@@ -125,14 +134,14 @@ export const MusicSearchPage: React.FC = () => {
 							{categories?.map(category => (
 								<div
 									className='music-search-page__category-item'
-									key={category.id}
-									onClick={() => handleCategoryClick(category.id, category.icons[0].url)}>
+									key={category?.id}
+									onClick={() => handleCategoryClick(category?.id, category?.icons[0].url)}>
 									<img
 										className='music-search-page__category-image'
-										src={category.icons[0].url}
-										alt={`Icon for ${category.name}`}
+										src={category?.icons[0].url}
+										alt={`Icon for ${category?.name}`}
 									/>
-									<h3 className='music-search-page__category-name'>{category.name}</h3>
+									<h3 className='music-search-page__category-name'>{category?.name}</h3>
 									<div className='music-search-page__category--playicon'>
 										<BsFillPlayFill size={32} />
 									</div>
