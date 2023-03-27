@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import  { useContext, useState, useRef, useEffect } from 'react';
 import { MusicPlayerContext, typeMusicPlayerContext } from '@/modules/ContextApi/MusicPlayerContext';
 import { BsFillPlayFill } from 'react-icons/bs';
 import { FiVolume2, FiVolumeX } from 'react-icons/fi';

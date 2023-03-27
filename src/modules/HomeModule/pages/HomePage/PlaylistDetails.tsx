@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useSpotify } from '@/modules/CustomHooks/useSpotify';
+import { useSpotify } from '../../../CustomHooks/useSpotify';
 import './PlaylistDetails.scss';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { BsClock, BsFillPlayFill } from 'react-icons/bs';

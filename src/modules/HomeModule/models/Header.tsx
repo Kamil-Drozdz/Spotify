@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { VscHome } from 'react-icons/vsc';
 import { HiSearch } from 'react-icons/hi';
 import { BiLibrary } from 'react-icons/bi';

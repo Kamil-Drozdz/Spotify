@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useSpotify } from '@/modules/CustomHooks/useSpotify';
+import { useSpotify } from '../../../CustomHooks/useSpotify';
 import './MusicSearchPage.scss';
 import Header from '../../models/Header';
 import CategoryDetails from '../HomePage/CategoryDetails';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSpotify } from '@/modules/CustomHooks/useSpotify';
+import { useSpotify } from '../../../CustomHooks/useSpotify';
 import './HomePage.scss';
 import CategoryDetails from './CategoryDetails';
 import { BsFillPlayFill } from 'react-icons/bs';
