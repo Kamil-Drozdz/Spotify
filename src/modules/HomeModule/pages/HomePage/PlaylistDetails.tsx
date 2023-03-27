@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useSpotify } from '../../../CustomHooks/useSpotify';
+import { useSpotify } from '@/modules/CustomHooks/useSpotify';
 import './PlaylistDetails.scss';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { BsClock, BsFillPlayFill } from 'react-icons/bs';
 import { BiPause } from 'react-icons/bi';
-import { MusicPlayerContext, typeMusicPlayerContext,Track } from '@/modules/ContextApi/MusicPlayerContext';
+import { MusicPlayerContext, typeMusicPlayerContext, Track } from '@/modules/ContextApi/MusicPlayerContext';
 
 interface PlaylistDetailsProps {
 	playlistId: string;

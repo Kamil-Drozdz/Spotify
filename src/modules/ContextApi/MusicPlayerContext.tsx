@@ -7,6 +7,7 @@ type MusicProviderProps = {
 };
 
 export interface Track {
+	id: number;
 	added_at: string;
 	track: {
 		id: number;

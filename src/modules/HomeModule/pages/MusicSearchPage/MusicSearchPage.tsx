@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useSpotify } from '../../../CustomHooks/useSpotify';
+import { useSpotify } from '@/modules/CustomHooks/useSpotify';
 import './MusicSearchPage.scss';
 import Header from '../../models/Header';
 import CategoryDetails from '../HomePage/CategoryDetails';
@@ -7,7 +7,7 @@ import { BsFillPlayFill } from 'react-icons/bs';
 import { MusicPlayerContext, typeMusicPlayerContext } from '@/modules/ContextApi/MusicPlayerContext';
 
 type Track = {
-	id: string;
+	id: number;
 	name: string;
 	album: {
 		name: string;

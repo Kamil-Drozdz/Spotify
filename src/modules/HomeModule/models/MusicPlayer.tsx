@@ -25,7 +25,21 @@ function MusicPlayer() {
 	const [marquee, setMarquee] = useState(false);
 	const container: any = useRef(null);
 
+	// helper function that displays the data and image of a given song on the locked screen of the phone / as in spotify
+	function setMediaMetadata(title: string, artist: string, artworkUrl:string) {
+		if ('mediaSession' in navigator) {
+			navigator.mediaSession.metadata = new MediaMetadata({
+				title: title,
+				artist: artist,
+				artwork: [{ src: artworkUrl }],
+			});
+		}
+	}
+
 	useEffect(() => {
+		if (currentTrack) {
+			setMediaMetadata(currentTrack.name, currentTrack?.artists[0]?.name, currentTrack?.album.images[2].url as string);
+		}
 		if (container.current) {
 			const textWidth = container.current.scrollWidth;
 			if (textWidth > 250) {

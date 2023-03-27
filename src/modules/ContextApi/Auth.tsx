@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { auth } from '../firebase.js';
 import Cookies from 'js-cookie';
-
 import { RotatingLines } from 'react-loader-spinner';
 import {
 	signInWithEmailAndPassword,

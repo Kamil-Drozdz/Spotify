@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BsFillPlayFill } from 'react-icons/bs';
-import { useSpotify } from '../../../CustomHooks/useSpotify';
+import { useSpotify } from '@/modules/CustomHooks/useSpotify';
 import { PlaylistDetails } from './PlaylistDetails';
 import './CategoryDetails.scss';
 
