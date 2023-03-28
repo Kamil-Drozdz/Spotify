@@ -117,6 +117,12 @@
 				a {
 					color: var(--color-secondary);
 					text-decoration: none;
+					height: 20px;
+					overflow: hidden;
+					white-space: nowrap;
+					width: 100%;
+					text-overflow: ellipsis;
+
 					&:hover {
 						text-decoration: underline;
 					}
@@ -163,7 +169,6 @@
 				}
 				&__name {
 					margin: 2px 15px;
-					overflow: hidden;
 					font-size: 10px;
 					max-width: 150px;
 				}
@@ -210,6 +215,7 @@
 }
 @media only screen and (max-width: 390px) {
 	.playlist .playlist-details-item__name {
+		overflow: hidden;
 		max-width: 100px;
 	}
 	.playlist .playlist-details .audio-player-item__progress {

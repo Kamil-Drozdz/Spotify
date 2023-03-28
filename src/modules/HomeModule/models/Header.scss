@@ -1,14 +1,14 @@
 .header {
 	width: 100%;
 	position: fixed;
-	background-color:var(--color-dark);
+	background-color: var(--color-dark);
 	color: #b3b3b3;
 	box-sizing: border-box;
 	z-index: 100;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	z-index: 11 ;
+	z-index: 11;
 	&-logo {
 		all: unset;
 		display: flex;
@@ -34,6 +34,9 @@
 
 			&-displayName {
 				margin: 0px 10px 0 0;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 			&-dropdown {
 				z-index: 1;

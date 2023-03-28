@@ -22,6 +22,7 @@ audio {
 	color: white;
 	display: flex;
 	align-items: center;
+	max-width: 50%;
 	&__now-playing {
 		overflow: hidden;
 		width: 250px;

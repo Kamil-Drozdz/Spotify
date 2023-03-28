@@ -1,4 +1,4 @@
-import  { useContext, useState, useRef, useEffect } from 'react';
+import { useContext, useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { MusicPlayerContext, typeMusicPlayerContext } from '@/modules/ContextApi/MusicPlayerContext';
 import { BsFillPlayFill } from 'react-icons/bs';
 import { FiVolume2, FiVolumeX } from 'react-icons/fi';
@@ -22,33 +22,53 @@ function MusicPlayer() {
 
 	const progressRef = useRef<HTMLInputElement>(null);
 	const volumeRef = useRef<HTMLInputElement>(null);
+	const [textMaxWidth, setTextMaxWidth] = useState(100);
 	const [marquee, setMarquee] = useState(false);
 	const container: any = useRef(null);
 
 	// helper function that displays the data and image of a given song on the locked screen of the phone / as in spotify
-	function setMediaMetadata(title: string, artist: string, artworkUrl:string) {
+
+	function setMediaMetadata(title: string, artist: string, artworkUrl: string) {
 		if ('mediaSession' in navigator) {
 			navigator.mediaSession.metadata = new MediaMetadata({
 				title: title,
 				artist: artist,
-				artwork: [{ src: artworkUrl }],
+				artwork: [{ src: artworkUrl, sizes: '64x64', type: 'image/jpeg' }],
 			});
 		}
 	}
 
+	const handleResize = () => {
+		if (window.innerWidth >= 800) {
+			setTextMaxWidth(250);
+		} else {
+			setTextMaxWidth(100);
+		}
+	};
 	useEffect(() => {
+		handleResize();
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
+	// uselayout runs synchronously with other effects and is guaranteed to execute before the DOM update
+
+	useLayoutEffect(() => {
 		if (currentTrack) {
 			setMediaMetadata(currentTrack.name, currentTrack?.artists[0]?.name, currentTrack?.album.images[2].url as string);
 		}
 		if (container.current) {
 			const textWidth = container.current.scrollWidth;
-			if (textWidth > 250) {
+			if (textWidth > textMaxWidth) {
 				setMarquee(true);
 			} else {
 				setMarquee(false);
 			}
 		}
-	}, [currentTrack]);
+	}, [currentTrack, textMaxWidth]);
 
 	return (
 		<div className='audio-player'>

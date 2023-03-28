@@ -149,7 +149,7 @@ const MusicPlayerProvider: React.FC<MusicProviderProps> = ({ children }) => {
 	}, [audioElement, volume]);
 
 	useEffect(() => {
-		if (tracks.length > 0) {
+		if (tracks?.length > 0) {
 			const firstAvailableIndex = findNextAvailableTrack(-1, 1);
 			if (firstAvailableIndex !== null) {
 				setCurrentTrack(tracks[firstAvailableIndex]?.track || null);

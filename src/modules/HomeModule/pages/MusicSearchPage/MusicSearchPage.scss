@@ -50,7 +50,7 @@
 	}
 	&--input {
 		width: 20%;
-		min-width: 100px;
+		min-width: 200px;
 		margin: 20px 5%;
 		padding: 8px;
 		border-radius: 25px;
@@ -146,6 +146,9 @@
 	.music-search-page {
 		&__categories {
 			padding-bottom: 40px;
+			&-title {
+				font-size: 20px;
+			}
 		}
 		&__category {
 			&-list {
