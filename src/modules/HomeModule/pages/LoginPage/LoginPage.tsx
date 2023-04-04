@@ -5,21 +5,55 @@ import logoFacebook from '../../../../assets/images/icons8-facebook-30.png';
 import logoApple from '../../../../assets/images/Apple-logo.png';
 import logoGoogle from '../../../../assets/images/icons8-google-30.png';
 import { AuthContext } from '../../../ContextApi/Auth';
+import { auth } from '@/modules/firebase.js';
+import { signInWithPopup, FacebookAuthProvider, GoogleAuthProvider, OAuthProvider } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
+interface Auth {
+	email: string;
+	setEmail: (email: string) => void;
+	setPassword: (password: string) => void;
+	password: string;
+	error: string;
+	setRememberMe: (rememberMe: boolean) => void;
+	handleLogin: () => void;
+	rememberMe: boolean;
+}
 export const LoginPage: React.FC = () => {
-	interface Auth {
-		email: string;
-		setEmail: (email: string) => void;
-		setPassword: (password: string) => void;
-		password: string;
-		error: string;
-		setRememberMe: (rememberMe: boolean) => void;
-		handleLogin: () => void;
-		rememberMe: boolean;
-	}
 	const { email, setEmail, setPassword, password, error, setRememberMe, handleLogin, rememberMe } = useContext(
 		AuthContext
 	) as Auth;
+	const navigate = useNavigate();
+
+	const signInWithFacebook = async () => {
+		const provider = new FacebookAuthProvider();
+		try {
+			await signInWithPopup(auth, provider);
+			navigate('/homepage');
+		} catch (error) {
+			console.error('Error during Facebook sign in', error);
+		}
+	};
+
+	const signInWithGoogle = async () => {
+		const provider = new GoogleAuthProvider();
+		try {
+			await signInWithPopup(auth, provider);
+			navigate('/homepage');
+		} catch (error) {
+			console.error('Error during Google sign in', error);
+		}
+	};
+
+	const signInWithApple = async () => {
+		const provider = new OAuthProvider('apple.com');
+		try {
+			await signInWithPopup(auth, provider);
+			navigate('/homepage');
+		} catch (error) {
+			console.error('Error during Apple sign in', error);
+		}
+	};
 
 	return (
 		<div className='login-page'>
@@ -27,18 +61,24 @@ export const LoginPage: React.FC = () => {
 				<h1 className='login-section__title'>Spotify</h1>
 				<p className='login-section__text-message'>Please sign in to Spotify to continue.</p>
 				<div className='login-section__buttons'>
-					<a className='login-section__buttons__button login-section__buttons__button--facebook'>
+					<button
+						onClick={signInWithFacebook}
+						className='login-section__buttons__button login-section__buttons__button--facebook'>
 						<img src={logoFacebook} />
 						Sign in with Facebook
-					</a>
-					<a className='login-section__buttons__button login-section__buttons__button--apple'>
+					</button>
+					<button
+						onClick={signInWithApple}
+						className='login-section__buttons__button login-section__buttons__button--apple'>
 						<img src={logoApple} />
 						Sign in with Apple
-					</a>
-					<a className='login-section__buttons__button login-section__buttons__button--google'>
+					</button>
+					<button
+						onClick={signInWithGoogle}
+						className='login-section__buttons__button login-section__buttons__button--google'>
 						<img src={logoGoogle} />
 						Sign in with Google
-					</a>
+					</button>
 				</div>
 				<p className='login-section__separator'>or</p>
 				<form className='login-section__form-log-in' onSubmit={handleLogin}>
