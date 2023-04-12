@@ -21,7 +21,7 @@
 
 <!-- About the Project -->
 ## :star2: About the Project
-This project was initiated as a challenge to test and showcase one's skills on the Invo Academy platform. It's currently at the maximum level of achievement for the platform. The application has evolved from the initial challenge, driven by the desire to expand and work on the Spotify API.
+This project was initiated as a challenge to test and showcase one's skills on the  <a href="https://platform.invo.academy/challenges/UyVpVMizCGqXS5MvbIFu/">Invo Academy platform</a>. It's currently at the maximum level of achievement for the platform. The application has evolved from the initial challenge, driven by the desire to expand and work on the Spotify API.
 
 Please note that this is only a preview version of the application. The user authentication process is handled by Firebase, which allows users to sign in using their Facebook, Google, or email credentials. After the Firebase authentication, the user is granted an access token from the Spotify API, which is valid for an hour and is automatically renewed.
 
