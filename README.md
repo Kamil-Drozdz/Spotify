@@ -1,35 +1,48 @@
-# INVO Academy JS Starter with Vite
+<h4>
+    <a href="https://preview-spotify.vercel.app/">View Demo</a>
+  <span> · </span>
+    <a href="https://github.com/Kamil-Drozdz/Spotify/issues">Report Bug</a>
+  <span> · </span>
+    <a href="https://github.com/Kamil-Drozdz/Spotify/issues">Request Feature</a>
+  </h4>
+</div>
 
-In order to see this file in preview mode in VS Code, press ```Ctrl + Shift + V```
+<br />
 
-## Recommended IDE Setup
+<!-- Table of Contents -->
+# :notebook_with_decorative_cover: Table of Contents
 
-- [VS Code](https://code.visualstudio.com/)
+- [About the Project](#star2-about-the-project)
+  * [Screenshots](#camera-screenshots)
+- [Contact](#handshake-contact)
 
-## How to start your challenge
 
-This is a Universal Starter for all the Advanced INVO Academy Challenges with React. In order to start your challenge, remove all the content inside ```App.tsx``` and start coding :) 
+  
 
-The main file structure is prepered, please make yourslef familiar with it. Your goal is to explore it and extend on your own while development. Feel free to remove all the extra files and code that you don't need.
+<!-- About the Project -->
+## :star2: About the Project
+This project was initiated as a challenge to test and showcase one's skills on the Invo Academy platform. It's currently at the maximum level of achievement for the platform. The application has evolved from the initial challenge, driven by the desire to expand and work on the Spotify API.
 
-## How to run your project
+Please note that this is only a preview version of the application. The user authentication process is handled by Firebase, which allows users to sign in using their Facebook, Google, or email credentials. After the Firebase authentication, the user is granted an access token from the Spotify API, which is valid for an hour and is automatically renewed.
 
-If you run your this project for the first time, you need to install npm dependencies by typing
+The Spotify Challenge App is built using BEM, SCSS, React, the Spotify API, and Firebase. Additionally, the project incorporates a design from Figma.
 
-```npm install``` (this is for the one-time installation only)
+<!-- Screenshots -->
+### :camera: Screenshots
 
-In order to run your project in a development mode type
+![image](https://user-images.githubusercontent.com/108432936/231450293-b2e234d8-22d1-4a60-9feb-56fbabbec321.png)
+![image](https://user-images.githubusercontent.com/108432936/231450351-766d2a8c-7f71-4938-ab0a-2a7e1212a7e2.png)
+![image](https://user-images.githubusercontent.com/108432936/231450507-5c3d5586-44c0-414f-b32f-512e75fa955c.png)
+![image](https://user-images.githubusercontent.com/108432936/231450575-54d9c085-84bb-447d-80f0-308ad8d5fe3b.png)
+![image](https://user-images.githubusercontent.com/108432936/231450791-a184691e-8899-4297-9351-2068a0b01de7.png)
 
-```npm run dev```
+<!-- Contact -->
+## :handshake: Contact
 
-then open your browser and go to the url showed in the terminal. That's it, if you make any changes in the code, browser will synchronize automatically.
+<h3 align="left">Connect with me:</h3>
+<p align="left">
+ <a href="https://kamildrozdz.pl" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/kaggle.svg" alt="kamildrozdz.pl" height="30" width="40" /></a>
+<a href="https://linkedin.com/in/kamil-dróżdż-919595198/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="kamil-dróżdż-919595198/" height="30" width="40" /></a>
+</p>
 
-## Building your project
-
-When you are ready to put your project on the Internet, you need to build it. For building, type
-
-```npm run build```
-
-This commend will create a dist folder. This is the folder containing your whole application and that's the only folder that you need to deploy to the server in order to make your app publically available.
-
-## More informations about folder structure and deploying your application you can find inside INVO Academy Knowledge Base
+Projects Link: [Other projects](https://github.com/Kamil-Drozdz?tab=repositories)
