@@ -113,7 +113,15 @@ export const LoginPage: React.FC = () => {
 							<p>Remember me</p>
 						</label>
 						<button disabled={!email || !password} className='login-section__login__button-log-in'>
-							Sign up
+							Sign in
+						</button>
+						<button
+							onClick={() => {
+								setEmail('test@test.com');
+								setPassword('Test123');
+							}}
+							className='login-section__login__button-test'>
+							TEST
 						</button>
 					</div>
 				</form>

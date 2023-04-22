@@ -22,7 +22,7 @@ const CategoryDetails: React.FC<CategoryIdDetails> = ({ categoryId }) => {
 	const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(null);
 	const { getCategoryPlaylists, isLoading } = useSpotify();
 	const [nextUrl, setNextUrl] = useState(null);
-
+	console.log(playlists);
 	useEffect(() => {
 		if (!isLoading) {
 			const fetchPlaylists = async () => {

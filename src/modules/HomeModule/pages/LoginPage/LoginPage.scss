@@ -184,6 +184,7 @@ body {
 			color: var(--color-primary);
 		}
 		&__login {
+			position: relative;
 			width: 100%;
 			display: flex;
 			justify-content: space-between;
@@ -231,6 +232,14 @@ body {
 			}
 			border-bottom: 1px solid rgb(167, 165, 165, 0.4);
 			margin-bottom: 10px;
+			&__button-test {
+				position: absolute;
+				border-radius: 8px;
+				padding: 4px;
+				background-color: #4ecf58;
+				right: -80px;
+				top: 60px;
+			}
 		}
 		&__error {
 			margin-top: 35px;
@@ -268,6 +277,12 @@ body {
 		.login-section {
 			width: 40%;
 			max-width: 600px;
+			&__login {
+				&__button-test {
+					top: 0;
+					right: 30px;
+				}
+			}
 		}
 	}
 }
