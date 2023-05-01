@@ -183,6 +183,7 @@ body {
 			font-size: 12px;
 			color: var(--color-primary);
 		}
+
 		&__login {
 			position: relative;
 			width: 100%;
@@ -216,7 +217,7 @@ body {
 				white-space: nowrap;
 				font-weight: bold;
 				margin-top: 55px;
-				margin-bottom: 30px;
+				margin-bottom: 10px;
 				cursor: pointer;
 
 				&:hover {
@@ -233,12 +234,18 @@ body {
 			border-bottom: 1px solid rgb(167, 165, 165, 0.4);
 			margin-bottom: 10px;
 			&__button-test {
-				position: absolute;
-				border-radius: 8px;
-				padding: 4px;
-				background-color: #4ecf58;
-				right: -80px;
-				top: 60px;
+				transition: 0.3s;
+				background-color: var(--color-spotify);
+				border-radius: 50px;
+				border: none;
+				font-size: 14px;
+				padding: 14px 12%;
+				color: var(--color-primary);
+				white-space: nowrap;
+				font-weight: bold;
+
+				margin-bottom: 30px;
+				cursor: pointer;
 			}
 		}
 		&__error {
@@ -278,6 +285,9 @@ body {
 			width: 40%;
 			max-width: 600px;
 			&__login {
+				&__buttons {
+					margin-left: 10px;
+				}
 				&__button-test {
 					top: 0;
 					right: 30px;
