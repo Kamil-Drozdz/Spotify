@@ -1,5 +1,5 @@
 <h4>
-    <a href="https://preview-spotify.vercel.app/">View Demo</a>
+    <a href="https://preview-spotifyapp.vercel.app/">View Demo</a>
   <span> · </span>
     <a href="https://github.com/Kamil-Drozdz/Spotify/issues">Report Bug</a>
   <span> · </span>
