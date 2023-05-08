@@ -57,7 +57,7 @@ function Header() {
 				</button>
 				<button
 					onClick={() => {
-						navigate('/homepage');
+						navigate('/liblary');
 					}}
 					className={`header-buttons--liblary ${location.pathname === '/liblary' ? 'active' : ''}`}>
 					<BiLibrary size={30} />

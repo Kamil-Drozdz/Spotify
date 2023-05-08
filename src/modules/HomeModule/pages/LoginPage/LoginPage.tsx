@@ -58,7 +58,7 @@ export const LoginPage: React.FC = () => {
 	return (
 		<div className='login-page'>
 			<div className='login-section'>
-				<h1 className='login-section__title'>Spotify</h1>
+				<h1 className='login-section__title'>Spotify app</h1>
 				<p className='login-section__text-message'>Please sign in to Spotify to continue.</p>
 				<div className='login-section__buttons'>
 					<button
