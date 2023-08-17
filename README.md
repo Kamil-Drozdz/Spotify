@@ -1,3 +1,12 @@
+##  Video 
+
+
+
+https://github.com/Kamil-Drozdz/Spotify/assets/108432936/6776ba86-88c5-4f77-a195-90a86cbdcfe3
+
+
+
+
 <h4>
     <a href="https://preview-spotifyapp.vercel.app/">View Demo</a>
   <span> · </span>
