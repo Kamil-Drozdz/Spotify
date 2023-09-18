@@ -109,12 +109,16 @@
 	&__container {
 		box-sizing: border-box;
 		width: 100%;
-		min-height: 165px;
+		min-height: 185px;
 		padding: 10px;
 		p,
 		span {
 			color: #797979;
 		}
+		&--preview {
+			color: rgb(240, 71, 71) !important;
+		}
+
 		a {
 			all: unset;
 			cursor: pointer;

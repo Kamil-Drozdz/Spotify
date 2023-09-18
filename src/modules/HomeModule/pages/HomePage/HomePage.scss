@@ -69,8 +69,7 @@
 			}
 			&__image {
 				border-radius: 8px 8px 0px 0px;
-
-				object-fit: fill;
+				aspect-ratio: 1/1;
 				width: 100%;
 				overflow: hidden;
 			}
@@ -131,6 +130,17 @@
 				}
 				&-displayName {
 					display: none;
+				}
+			}
+		}
+	}
+}
+@media only screen and (max-width: 452px) {
+	.home-page {
+		.category-list {
+			.category-list__item {
+				&__image {
+					width: 274px;
 				}
 			}
 		}

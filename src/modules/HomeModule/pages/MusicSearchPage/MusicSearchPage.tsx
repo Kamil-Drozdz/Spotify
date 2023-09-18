@@ -107,7 +107,7 @@ export const MusicSearchPage: React.FC = () => {
 										))}
 									</p>
 									<p>Album: {track?.album.name}</p>
-									{track?.preview_url ? '' : <p>Preview not available</p>}
+									{track?.preview_url ? '' : <p className='track-list__container--preview'>Preview not available</p>}
 									<p>Popularity: {track?.popularity}</p>
 									<a href={track?.external_urls.spotify}>Full track here</a>
 									<div className='track-list__item--playicon'>

@@ -28,7 +28,6 @@ export const HomePage: React.FC = () => {
 				setCategories(fetchedCategories?.items);
 				setNextCategoriesUrl(fetchedCategories?.next);
 			};
-
 			fetchCategories();
 		}
 	}, [isLoading]);
