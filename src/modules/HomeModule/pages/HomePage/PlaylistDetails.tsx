@@ -11,9 +11,7 @@ interface PlaylistDetailsProps {
 }
 
 export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
-	const { isPlaying, setIsPlaying, currentTrack, setCurrentTrack, tracks, updateTracks } = useContext(
-		MusicPlayerContext
-	) as typeMusicPlayerContext;
+	const { isPlaying, setIsPlaying, currentTrack, setCurrentTrack, tracks, updateTracks } = useContext(MusicPlayerContext) as typeMusicPlayerContext;
 	const { getPlaylistTracks, isLoading } = useSpotify();
 	const [hoveredTrack, setHoveredTrack] = useState<number | null>(null);
 
@@ -41,7 +39,7 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 	}, [playlistId, isLoading]);
 
 	return (
-		<div className='playlist'>
+		<div id='playlist-details' className='playlist'>
 			<h2 className='playlist-title'>Playlist Details preview</h2>
 			<div className='playlist-details'>
 				<div className='playlist-details__header'>
@@ -53,14 +51,7 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 					<BsClock title='song duration' />
 				</div>
 				{tracks?.map((track: Track, index: number) => (
-					<div
-						className={`playlist-details-item ${
-							track?.track.id === currentTrack?.id ? 'playlist-details-item--active' : ''
-						}`}
-						onMouseEnter={() => setHoveredTrack(index + 1)}
-						onMouseLeave={() => setHoveredTrack(null)}
-						key={track?.track.id}
-						onClick={() => setCurrentTrack(track?.track)}>
+					<div className={`playlist-details-item ${track?.track.id === currentTrack?.id ? 'playlist-details-item--active' : ''}`} onMouseEnter={() => setHoveredTrack(index + 1)} onMouseLeave={() => setHoveredTrack(null)} key={track?.track.id} onClick={() => setCurrentTrack(track?.track)}>
 						{track?.track?.preview_url ? (
 							<p className='playlist-details-item__number'>
 								{index + 1 === hoveredTrack && track?.track.id === currentTrack?.id ? (
@@ -85,27 +76,17 @@ export const PlaylistDetails = ({ playlistId }: PlaylistDetailsProps) => {
 							<p className=' playlist-details-item__default'> {index + 1}</p>
 						)}
 						<div className='playlist-details-item__describe'>
-							<img
-								className='playlist-details-item__image'
-								src={track?.track?.album?.images[2]?.url}
-								alt={track?.track?.artists[0]?.name}
-							/>
+							<img className='playlist-details-item__image' src={track?.track?.album?.images[2]?.url} alt={track?.track?.artists[0]?.name} />
 							<span className='playlist-details-item__name'>
 								<a href={track?.track?.artists[0]?.external_urls?.spotify}>{track?.track?.artists[0]?.name}</a>
 								<a href={track?.track?.external_urls?.spotify}>{track?.track?.name}</a>
 							</span>
 						</div>
-						{track?.track?.preview_url ? (
-							<span className='playlist-details-item__avability'>avaible</span>
-						) : (
-							<span className='playlist-details-item__not-avability'> not avaible</span>
-						)}
+						{track?.track?.preview_url ? <span className='playlist-details-item__avability'>avaible</span> : <span className='playlist-details-item__not-avability'> not avaible</span>}
 						<a className='playlist-details-item__link' href={track?.track?.external_urls?.spotify}>
 							Spotify
 						</a>
-						<span className='playlist-details-item__date-added'>
-							{formatDistanceToNow(parseISO(track.added_at), { addSuffix: true })}
-						</span>
+						<span className='playlist-details-item__date-added'>{formatDistanceToNow(parseISO(track.added_at), { addSuffix: true })}</span>
 						<span className='playlist-details-item__duration'>{msToTime(track?.track?.duration_ms)}</span>
 					</div>
 				))}

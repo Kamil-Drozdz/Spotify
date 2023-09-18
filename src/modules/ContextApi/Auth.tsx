@@ -2,12 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { auth } from '../firebase.js';
 import Cookies from 'js-cookie';
 import { RotatingLines } from 'react-loader-spinner';
-import {
-	signInWithEmailAndPassword,
-	browserSessionPersistence,
-	setPersistence,
-	browserLocalPersistence,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword, browserSessionPersistence, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext({});
@@ -31,7 +26,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		await signInWithEmailAndPassword(auth, email, password)
 			.then(userCredential => {
 				userCredential.user;
-				navigate('/welcome');
+				navigate('/homepage');
 			})
 			.catch(error => {
 				setError(error.message);
@@ -45,9 +40,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 				body: 'grant_type=client_credentials',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
-					Authorization: `Basic ${btoa(
-						`${import.meta.env.VITE_SPOTIFY_CLIENT_ID}:${import.meta.env.VITE_SPOTIFY_CLIENT_SECRET}`
-					)}`,
+					Authorization: `Basic ${btoa(`${import.meta.env.VITE_SPOTIFY_CLIENT_ID}:${import.meta.env.VITE_SPOTIFY_CLIENT_SECRET}`)}`,
 				},
 			});
 			if (response.ok) {
@@ -113,6 +106,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',
+					color: 'white',
 				}}>
 				<RotatingLines strokeColor='green' strokeWidth='5' animationDuration='0.55' width='120' visible={true} />
 				<p>Checking</p>

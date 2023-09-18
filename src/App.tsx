@@ -29,7 +29,6 @@ const App: React.FC = () => {
 				<Route path='/' element={<LoginPage />} />
 				<Route path='/register' element={<RegisterPage />} />
 				<Route element={<PrivateRoute />}>
-					<Route path='/welcome' element={<WelcomePage />} />
 					<Route path='/homepage' element={<HomePage />} />
 					<Route path='/liblary' element={<LiblaryPage />} />
 					<Route path='/music-search' element={<MusicSearchPage />} />

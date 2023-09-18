@@ -1,11 +1,10 @@
 .home-page {
 	height: 100%;
+	min-height: 200vh;
 	padding: 50px 0 100px 0;
-	min-height: 100vh;
 	font-size: 24px;
 	color: var(--color-primary);
 	justify-content: center;
-	background-color: rgb(117, 110, 110);
 	scroll-behavior: smooth;
 	&-header {
 		width: 90%;
@@ -21,22 +20,18 @@
 			border-radius: 8px;
 		}
 	}
-
 	.category-list {
-		padding: 10px;
 		border-radius: 8px;
-		background-color: #181818;
-		overflow-x: scroll;
-		height: 250px;
-		margin: 0 5%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		grid-template-rows: repeat(1, 1fr);
+		gap: 10px;
 		margin-bottom: 10px;
+		padding: 0 5% 0 5%;
 		.category-list__item {
-			box-shadow: 8px 11px 31px 10px rgba(66, 68, 90, 1);
-			width: 220px;
+			text-decoration: none;
+			margin: auto;
+			box-shadow: 3px 6px 46px 5px rgba(66, 68, 90, 1);
 			height: 200px;
 			font-size: 12px;
 			color: var(--color-secondary);
@@ -45,7 +40,6 @@
 			align-items: center;
 			justify-content: center;
 			flex-direction: column;
-			margin: 5px 10px;
 			padding-bottom: 10px;
 			background-color: #181818;
 			border-radius: 8px;
@@ -53,8 +47,9 @@
 				box-shadow: 0px 13px 35px 6px rgba(0, 0, 0, 0.75);
 				background-color: var(--color-spotify);
 				position: absolute;
-				box-sizing: border-box;
-				text-align: center;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				opacity: 0;
 				bottom: 0%;
 				height: 44px;
@@ -64,14 +59,18 @@
 				inline-size: 44px;
 				cursor: pointer;
 				transition: 0.3s;
-				padding: 5px;
+			}
+			svg {
+				width: auto;
 			}
 			h3 {
+				text-align: center;
 				overflow-wrap: break-word;
 			}
 			&__image {
-				border-radius: 8px;
-				object-fit: fit;
+				border-radius: 8px 8px 0px 0px;
+
+				object-fit: fill;
 				width: 100%;
 				overflow: hidden;
 			}
@@ -89,8 +88,6 @@
 	}
 	&__load-more {
 		transition: 0.3s;
-		width: 15%;
-		min-width: 300px;
 		height: 47px;
 		justify-content: center;
 		color: var(--color-primary);
@@ -101,9 +98,9 @@
 		background-color: var(--color-spotify);
 		border-radius: 50px;
 		border: none;
-		padding: 16px 2px;
+		padding: 16px 32px;
 		font-weight: bold;
-		margin-bottom: 30px;
+		margin: 30px 10% 30px 10%;
 		cursor: pointer;
 		&:hover {
 			border: 1px solid var(--color-secondary);

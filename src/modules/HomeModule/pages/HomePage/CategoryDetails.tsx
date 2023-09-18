@@ -22,7 +22,7 @@ const CategoryDetails: React.FC<CategoryIdDetails> = ({ categoryId }) => {
 	const [selectedPlaylistId, setSelectedPlaylistId] = useState<string | null>(null);
 	const { getCategoryPlaylists, isLoading } = useSpotify();
 	const [nextUrl, setNextUrl] = useState(null);
-	console.log(playlists);
+
 	useEffect(() => {
 		if (!isLoading) {
 			const fetchPlaylists = async () => {
@@ -47,32 +47,29 @@ const CategoryDetails: React.FC<CategoryIdDetails> = ({ categoryId }) => {
 	const handlePlaylistClick = (playlistId: string) => {
 		setSelectedPlaylistId(playlistId);
 	};
-	return playlists?.length ? (
-		<div className='categories'>
-			<div className='categories-details'>
-				{playlists?.map((playlist, index) => (
-					<div
-						className='categories-details__item'
-						key={`${playlist?.id}-${index}`}
-						onClick={() => handlePlaylistClick(playlist?.id)}>
-						<img
-							className='categories-details__item__image'
-							src={playlist?.images[0].url}
-							alt={playlist?.description}
-						/>
-						<div className='categories-details__item__playicon'>
-							<BsFillPlayFill size={32} />
-						</div>
+	return (
+		<div id='categories-details'>
+			{playlists?.length ? (
+				<div className='categories'>
+					<div className='categories-details'>
+						{playlists?.map((playlist, index) => (
+							<a href='#playlist-details' className='categories-details__item' key={`${playlist?.id}-${index}`} onClick={() => handlePlaylistClick(playlist?.id)}>
+								<img className='categories-details__item__image' src={playlist?.images[0].url} alt={playlist?.description} />
+								<div className='categories-details__item__playicon'>
+									<BsFillPlayFill size={32} />
+								</div>
+							</a>
+						))}
 					</div>
-				))}
-			</div>
-			<button className='categories-details__button-load' disabled={!nextUrl} onClick={loadMorePlaylists}>
-				Load more playlists
-			</button>
-			{selectedPlaylistId && <PlaylistDetails playlistId={selectedPlaylistId} />}
+					<button className='categories-details__button-load' disabled={!nextUrl} onClick={loadMorePlaylists}>
+						Load more playlists
+					</button>
+					{selectedPlaylistId && <PlaylistDetails playlistId={selectedPlaylistId} />}
+				</div>
+			) : (
+				<div>Ups we dont have this playlists now</div>
+			)}
 		</div>
-	) : (
-		<div>Ups we dont have this playlists now</div>
 	);
 };
 

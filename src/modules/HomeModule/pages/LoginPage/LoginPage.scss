@@ -3,11 +3,14 @@ body {
 	height: 100%;
 	margin: 0;
 	font-family: 'Lato', sans-serif;
+	background-color: #1d1d1d;
+	scroll-behavior: smooth;
 }
 .login-page {
 	color: var(--color-primary);
 	display: flex;
 	flex-direction: column;
+	background-color: white;
 	height: 100vh;
 	width: 100vw;
 	overflow-x: hidden;

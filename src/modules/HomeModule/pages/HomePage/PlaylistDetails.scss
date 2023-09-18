@@ -8,6 +8,7 @@
 		background-color: var(--color-secondary);
 		padding: 4px;
 		border-radius: 8px;
+		margin-top: 60px;
 	}
 
 	.playlist-details {
@@ -19,7 +20,6 @@
 		background-color: var(--color-primary);
 		justify-content: center;
 		color: var(--color-secondary);
-
 		&__header {
 			justify-content: space-between;
 			padding: 10px 0px;
